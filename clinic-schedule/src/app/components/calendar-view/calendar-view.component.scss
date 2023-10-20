@@ -17,6 +17,9 @@ ion-col {
         border-bottom: dotted 1px lightgray; 
         border-right: solid 1px grey;
     }
+    ion-col:not(.time-label):hover {
+        background-color: lightgray;
+    }
     ion-col.time-label {
         transform: translateY(-15px); color: gray;
     }

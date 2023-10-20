@@ -1,0 +1,7 @@
+{
+  "name": "clinic-schedule",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

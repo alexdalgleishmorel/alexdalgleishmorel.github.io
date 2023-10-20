@@ -1,0 +1,14 @@
+.toolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.toolbar-spacer {
+    padding: 10px;
+}
+
+.user-context {
+    width: 20vw;
+}

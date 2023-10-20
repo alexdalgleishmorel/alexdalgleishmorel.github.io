@@ -1,0 +1,23 @@
+<ion-header>
+  <div class="toolbar">
+    <div class="toolbar-spacer"></div>
+    <ion-card class="user-context">
+      <ion-card-header>
+        <ion-card-title>{{userContext.firstName}} {{userContext.lastName}}</ion-card-title>
+        <ion-card-subtitle>{{userContext.role}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+    <div class="toolbar-spacer"></div>
+    <ion-searchbar placeholder="Physician/Nurse">
+    </ion-searchbar>
+    <div class="toolbar-spacer"></div>
+    <ion-button size="small"><ion-icon name="chevron-back-outline"></ion-icon></ion-button>
+    <ion-title>OCT 7 - OCT 13</ion-title>
+    <ion-button size="small"><ion-icon name="chevron-forward-outline"></ion-icon></ion-button>
+    <div class="toolbar-spacer"></div>
+  </div>
+</ion-header>
+
+<ion-content>
+  <app-calendar-view></app-calendar-view>
+</ion-content>

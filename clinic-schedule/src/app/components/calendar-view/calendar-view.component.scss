@@ -5,7 +5,21 @@
 
 ion-col {
     text-align: center;
-    --background-hover: red;
+}
+
+.timeslot-grid {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    ion-row {
+        height: 75px;
+    }
+    ion-col:not(.time-label) {
+        border-bottom: dotted 1px lightgray; 
+        border-right: solid 1px grey;
+    }
+    ion-col.time-label {
+        transform: translateY(-15px); color: gray;
+    }
 }
 
 ion-card {

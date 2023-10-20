@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content [scrollY]="false">
   <div class="content">
     <ion-grid>
       <ion-row>
@@ -12,39 +12,20 @@
         <ion-col>SUN</ion-col>
       </ion-row>
     </ion-grid>
-    <div class="spacer"></div>
-    <ion-grid *ngFor="let time of timeLabels; index as i" style="padding-top: 0px; padding-bottom: 0px;">
-      <ion-row>
-        <ion-col style="transform: translateY(-15px); color: gray;">{{time}}</ion-col>
-        <ion-col
-          (click)="onTimeslotSelect('monday', time)"
-          style="border-bottom: dotted 1px lightgray; border-right: solid 1px grey; height: 75px;">
-        </ion-col>
-        <ion-col
-          (click)="onTimeslotSelect('tuesday', time)"
-          style="border-bottom: dotted 1px lightgray; border-right: solid 1px grey; height: 75px;">
-        </ion-col>
-        <ion-col
-          (click)="onTimeslotSelect('wednesday', time)"
-          style="border-bottom: dotted 1px lightgray; border-right: solid 1px grey; height: 75px;">
-        </ion-col>
-        <ion-col
-          (click)="onTimeslotSelect('thursday', time)"
-          style="border-bottom: dotted 1px lightgray; border-right: solid 1px grey; height: 75px;">
-        </ion-col>
-        <ion-col
-          (click)="onTimeslotSelect('friday', time)"
-          style="border-bottom: dotted 1px lightgray; border-right: solid 1px grey; height: 75px;">
-        </ion-col>
-        <ion-col
-          (click)="onTimeslotSelect('saturday', time)"
-          style="border-bottom: dotted 1px lightgray; border-right: solid 1px grey; height: 75px;">
-        </ion-col>
-        <ion-col
-          (click)="onTimeslotSelect('sunday', time)"
-          style="border-bottom: dotted 1px lightgray; height: 75px;">
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-content [scrollY]="true">
+      <div class="spacer"></div>
+      <ion-grid class="timeslot-grid" *ngFor="let time of timeLabels; index as i">
+        <ion-row>
+          <ion-col class="time-label">{{time}}</ion-col>
+          <ion-col (click)="onTimeslotSelect('monday', time)"></ion-col>
+          <ion-col (click)="onTimeslotSelect('tuesday', time)"></ion-col>
+          <ion-col (click)="onTimeslotSelect('wednesday', time)"></ion-col>
+          <ion-col (click)="onTimeslotSelect('thursday', time)"></ion-col>
+          <ion-col (click)="onTimeslotSelect('friday', time)"></ion-col>
+          <ion-col (click)="onTimeslotSelect('saturday', time)"></ion-col>
+          <ion-col (click)="onTimeslotSelect('sunday', time)"></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
   </div>  
 </ion-content>

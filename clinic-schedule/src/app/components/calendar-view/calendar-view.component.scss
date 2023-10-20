@@ -1,11 +1,18 @@
 .content {
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-ion-title {
+ion-col {
     text-align: center;
+    --background-hover: red;
+}
+
+ion-card {
+    padding: 0px;
+    margin: 0px;
+}
+
+.spacer {
+    padding: 10px;
 }

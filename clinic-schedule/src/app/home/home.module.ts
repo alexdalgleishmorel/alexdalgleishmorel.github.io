@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { CalendarViewComponent } from '../components/calendar-view/calendar-view.component';
+import { CreateAppointmentModalComponent } from '../components/create-appointment-modal/create-appointment-modal.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { CalendarViewComponent } from '../components/calendar-view/calendar-view
   ],
   declarations: [
     HomePage,
-    CalendarViewComponent
+    CalendarViewComponent,
+    CreateAppointmentModalComponent
   ]
 })
 export class HomePageModule {}

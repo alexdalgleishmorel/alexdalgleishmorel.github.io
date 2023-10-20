@@ -11,3 +11,6 @@ This will be a command-line interface that will allow you to build and run the p
 
 ### Step 3 - Running The Project
 At this point, you should be able to simply run `ionic serve` from the main directory of the repo to get the project running. Any changes made and saved to the code will dynamically update the front-end!
+
+## ***NOTES***
+Toggling between light and dark mode can be done by editing line 79 of `clinic-schedule/src/theme/variables.scss`.

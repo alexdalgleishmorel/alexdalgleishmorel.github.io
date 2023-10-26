@@ -9,18 +9,27 @@
         </ion-card-header>
       </ion-card>
       <div class="toolbar-spacer"></div>
-      <ion-searchbar placeholder="Physician/Nurse">
-      </ion-searchbar>
+      <ion-searchbar placeholder="Physician/Nurse"></ion-searchbar>
       <div class="toolbar-spacer"></div>
-      <ion-button size="small"><ion-icon name="chevron-back-outline"></ion-icon></ion-button>
-      <ion-title>OCT 7 - OCT 13</ion-title>
-      <ion-button size="small"><ion-icon name="chevron-forward-outline"></ion-icon></ion-button>
+      <ion-searchbar placeholder="Patient Name"></ion-searchbar>
+      <div class="toolbar-spacer"></div>
+      <ion-button size="small" (click)="decrementDateIndex()"><ion-icon name="chevron-back-outline"></ion-icon></ion-button>
+      <ion-title class="dateButton" (click)="openCalendar()">{{getCurrentDateRange()}}</ion-title>
+      <ion-button size="small" (click)="incrementDateIndex()"><ion-icon name="chevron-forward-outline"></ion-icon></ion-button>
       <div class="toolbar-spacer"></div>
     </div>
   </ion-header>
   
   <ion-content>
-    <app-calendar-view></app-calendar-view>
+    <app-calendar-view *ngIf="physicianName else emptyCalendar" [dateIndex]="dateIndex"></app-calendar-view>
   </ion-content>
   
 </ion-content>
+
+<ng-template #emptyCalendar>
+  <ion-content>
+    <div class="content">
+      <ion-text>PLEASE SELECT A PHYSICIAN IN THE UPPER TOOLBAR TO VIEW THE SCHEDULE</ion-text>
+    </div>
+  </ion-content>
+</ng-template>

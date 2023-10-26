@@ -33,3 +33,17 @@ ion-card {
 .spacer {
     padding: 10px;
 }
+
+.appointment {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #3dc2ff;
+}
+
+.appointment:hover {
+    cursor: pointer;
+}

@@ -1,0 +1,67 @@
+.content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.centered {
+    text-align: center;
+}
+
+.buttons-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spacer {
+    padding: 10px;
+}
+
+.time-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.name-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.main-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.patient-information-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.appointment-controls-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.row-container {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.column-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.small-spacer {
+    padding: 5px;
+}

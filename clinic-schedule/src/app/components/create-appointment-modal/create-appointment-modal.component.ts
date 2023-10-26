@@ -8,14 +8,22 @@ import { ModalController } from '@ionic/angular';
 })
 export class CreateAppointmentModalComponent implements OnInit {
 
-  @Input() date: string = '';
-  @Input() startTime: string = '';
-  public endTime: string = '';
+  @Input() date?: Date;
+  @Input() startTime?: Date;
+  public endTime?: Date;
+
+  public dateString: string = '';
+  public startTimeString: string = '';
+  public endTimeString: string = '';
 
   constructor(private modalCtrl: ModalController) {}
 
   ngOnInit() {
-    this.endTime = this.startTime;
+    this.dateString = this.date ? this.date.toLocaleDateString() : '';
+    this.startTimeString = this.startTime ? this.startTime.toLocaleTimeString('en-US', { hour12: false, hour: "2-digit", minute: "2-digit" }) : '';
+    this.endTime = this.startTime ? new Date(this.startTime) : new Date();
+    this.endTime.setHours(this.endTime.getHours()+1);
+    this.endTimeString = this.endTime ? this.endTime.toLocaleTimeString('en-US', { hour12: false, hour: "2-digit", minute: "2-digit" }) : '';
   }
 
   cancel() {    

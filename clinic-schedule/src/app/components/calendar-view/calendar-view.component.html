@@ -3,28 +3,63 @@
     <div class="spacer"></div>
     <ion-grid>
       <ion-row>
-        <ion-col></ion-col>
-        <ion-col>MON</ion-col>
-        <ion-col>TUES</ion-col>
-        <ion-col>WED</ion-col>
-        <ion-col>THURS</ion-col>
-        <ion-col>FRI</ion-col>
-        <ion-col>SAT</ion-col>
-        <ion-col>SUN</ion-col>
+        <ion-col><ion-toggle><ion-text color="medium">24 Hour</ion-text></ion-toggle></ion-col>
+        <ion-col>MON <ion-text color="medium">{{getDateNumber(0)}}</ion-text></ion-col>
+        <ion-col>TUES <ion-text color="medium">{{getDateNumber(1)}}</ion-text></ion-col>
+        <ion-col>WED <ion-text color="medium">{{getDateNumber(2)}}</ion-text></ion-col>
+        <ion-col>THURS <ion-text color="medium">{{getDateNumber(3)}}</ion-text></ion-col>
+        <ion-col>FRI <ion-text color="medium">{{getDateNumber(4)}}</ion-text></ion-col>
+        <ion-col>SAT <ion-text color="medium">{{getDateNumber(5)}}</ion-text></ion-col>
+        <ion-col>SUN <ion-text color="medium">{{getDateNumber(6)}}</ion-text></ion-col>
       </ion-row>
     </ion-grid>
     <ion-content [scrollY]="true">
       <div class="spacer"></div>
-      <ion-grid class="timeslot-grid" *ngFor="let time of timeLabels; index as i">
+      <ion-grid class="timeslot-grid" *ngFor="let time of timeLabels; index as i;">
         <ion-row>
           <ion-col class="time-label">{{time}}</ion-col>
-          <ion-col (click)="onTimeslotSelect('monday', time)"></ion-col>
-          <ion-col (click)="onTimeslotSelect('tuesday', time)"></ion-col>
-          <ion-col (click)="onTimeslotSelect('wednesday', time)"></ion-col>
-          <ion-col (click)="onTimeslotSelect('thursday', time)"></ion-col>
-          <ion-col (click)="onTimeslotSelect('friday', time)"></ion-col>
-          <ion-col (click)="onTimeslotSelect('saturday', time)"></ion-col>
-          <ion-col (click)="onTimeslotSelect('sunday', time)"></ion-col>
+          <ion-col (click)="onTimeslotSelect(0, i)">
+            <div class="appointment" *ngIf="getAppointment(0, i); let appointment">
+              <ion-text><i>{{appointment.patient.firstName}} {{appointment.patient.lastName}}</i></ion-text>
+              <ion-text><b>{{appointment.physicianName}}</b></ion-text>
+            </div>
+          </ion-col>
+          <ion-col (click)="onTimeslotSelect(1, i)">
+            <div class="appointment" *ngIf="getAppointment(1, i); let appointment">
+              <ion-text><i>{{appointment.patient.firstName}} {{appointment.patient.lastName}}</i></ion-text>
+              <ion-text><b>{{appointment.physicianName}}</b></ion-text>
+            </div>
+          </ion-col>
+          <ion-col (click)="onTimeslotSelect(2, i)">
+            <div class="appointment" *ngIf="getAppointment(2, i); let appointment">
+              <ion-text><i>{{appointment.patient.firstName}} {{appointment.patient.lastName}}</i></ion-text>
+              <ion-text><b>{{appointment.physicianName}}</b></ion-text>
+            </div>
+          </ion-col>
+          <ion-col (click)="onTimeslotSelect(3, i)">
+            <div class="appointment" *ngIf="getAppointment(3, i); let appointment">
+              <ion-text><i>{{appointment.patient.firstName}} {{appointment.patient.lastName}}</i></ion-text>
+              <ion-text><b>{{appointment.physicianName}}</b></ion-text>
+            </div>
+          </ion-col>
+          <ion-col (click)="onTimeslotSelect(4, i)">
+            <div class="appointment" *ngIf="getAppointment(4, i); let appointment">
+              <ion-text><i>{{appointment.patient.firstName}} {{appointment.patient.lastName}}</i></ion-text>
+              <ion-text><b>{{appointment.physicianName}}</b></ion-text>
+            </div>
+          </ion-col>
+          <ion-col (click)="onTimeslotSelect(5, i)">
+            <div class="appointment" *ngIf="getAppointment(5, i); let appointment">
+              <ion-text><i>{{appointment.patient.firstName}} {{appointment.patient.lastName}}</i></ion-text>
+              <ion-text><b>{{appointment.physicianName}}</b></ion-text>
+            </div>
+          </ion-col>
+          <ion-col (click)="onTimeslotSelect(6, i)">
+            <div class="appointment" *ngIf="getAppointment(6, i); let appointment">
+              <ion-text><i>{{appointment.patient.firstName}} {{appointment.patient.lastName}}</i></ion-text>
+              <ion-text><b>{{appointment.physicianName}}</b></ion-text>
+            </div>
+          </ion-col>
         </ion-row>
       </ion-grid>
     </ion-content>

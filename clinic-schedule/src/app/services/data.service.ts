@@ -55,9 +55,12 @@ export class DataService {
     return this.hourNumbers;
   }
 
+  /**
+   * Returns the timelot hour labels
+   * @returns {string[]} Each hour representation, not including the 30 minute marks
+   */
   public getHourStringRepresentations(): string[] {
-    // return this.hourNumbers.map(number => this.getHourRepresentation(number));
-    return this.hourNumbers.map((number, index) => index % 2 === 0 ? this.getHourRepresentation(number) : ''); // this version skips the half hour labels
+    return this.hourNumbers.map((number, index) => index % 2 === 0 ? this.getHourRepresentation(number) : '');
   }
 
   public getPhysicianName(): string {

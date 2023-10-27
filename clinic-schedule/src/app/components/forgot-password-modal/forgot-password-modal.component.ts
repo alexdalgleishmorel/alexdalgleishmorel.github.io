@@ -26,4 +26,8 @@ export class ForgotPasswordModalComponent implements OnInit {
     await toast.present();
     this.modalCtrl.dismiss();
   }
+
+  cancel() {
+    this.modalCtrl.dismiss();
+  }
 }

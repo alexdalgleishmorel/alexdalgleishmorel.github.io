@@ -12,7 +12,7 @@ import { DateSelectionModalComponent } from '../components/date-selection-modal/
 export class HomePage {
   public userContext: SystemUser
   public physicianName: string;
-  public dateIndex: number = 0;
+  public dateIndex: number = 52;
 
   constructor(private dataService: DataService, private modalCtrl: ModalController) {
     this.userContext = this.dataService.getCurrentUser();

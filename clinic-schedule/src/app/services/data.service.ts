@@ -54,9 +54,11 @@ export class DataService {
   }
 
   private getDateRanges(): DateRange[] {
+
+    // ADDING FUTURE DATES
     let currentDate = new Date;
     const numOfWeeksToGenerate: number = 52;
-    let dateRanges: DateRange[] = [];
+    let futureDateRanges: DateRange[] = [];
 
     for (let i = 0; i < numOfWeeksToGenerate; i ++) {
       let mondayNumberValue = currentDate.getDate() - currentDate.getDay() + 1;
@@ -65,19 +67,36 @@ export class DataService {
       let mondayDate = new Date(currentDate.setDate(mondayNumberValue));
       let sundayDate = new Date(currentDate.setDate(sundayNumberValue));
 
-      dateRanges.push({ 
+      futureDateRanges.push({ 
         startDate: mondayDate.toLocaleDateString('en-US'), 
         endDate: sundayDate.toLocaleDateString('en-US') 
       });
       currentDate.setDate(sundayDate.getDate()+1);
     }
 
-    return dateRanges;
+    // ADDING PAST DATES
+    currentDate = new Date;
+    currentDate.setFullYear(currentDate.getFullYear()-1);
+    let pastDateRanges: DateRange[] = [];
+
+    for (let i = 0; i < numOfWeeksToGenerate; i ++) {
+      let mondayNumberValue = currentDate.getDate() - currentDate.getDay() + 1;
+      let sundayNumberValue = mondayNumberValue + 6;
+      
+      let mondayDate = new Date(currentDate.setDate(mondayNumberValue));
+      let sundayDate = new Date(currentDate.setDate(sundayNumberValue));
+
+      pastDateRanges.push({ 
+        startDate: mondayDate.toLocaleDateString('en-US'), 
+        endDate: sundayDate.toLocaleDateString('en-US') 
+      });
+      currentDate.setDate(sundayDate.getDate()+1);
+    }
+
+    return pastDateRanges.concat(futureDateRanges);
   }
 
   public getSchedule(dateString: string) {
-    // console.log(dateString);
-    // console.log(this.schedule);
     return this.schedule[dateString] || [];
   }
 }

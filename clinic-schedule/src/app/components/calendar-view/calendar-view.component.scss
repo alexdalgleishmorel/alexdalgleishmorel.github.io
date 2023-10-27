@@ -11,7 +11,10 @@ ion-col {
     padding-top: 0px;
     padding-bottom: 0px;
     ion-row {
-        height: 75px;
+        height: 30px;
+    }
+    ion-row.has-time ion-col:not(.time-label) {
+        border-bottom: solid 1px grey;
     }
     ion-col:not(.time-label) {
         border-bottom: dotted 1px lightgray; 
@@ -37,10 +40,6 @@ ion-card {
 .appointment {
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     background-color: #3dc2ff;
 }
 

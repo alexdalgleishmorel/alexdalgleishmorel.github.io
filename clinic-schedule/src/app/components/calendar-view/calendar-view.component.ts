@@ -14,12 +14,19 @@ export class CalendarViewComponent implements OnInit {
   @Input() dateIndex: number = 0;
 
   public timeLabels: string[];
+  public hourToggleValue: boolean = false;
 
   constructor(private dataService: DataService, private modalCtrl: ModalController) {
     this.timeLabels = this.dataService.getHourStringRepresentations();
+    this.hourToggleValue = this.dataService.isTwelveHourRepresentation();
   }
 
   ngOnInit() {}
+
+  public onHourToggleChange(event: any) {
+    this.dataService.setTwelveHourRepresentation(event.detail.checked);
+    this.timeLabels = this.dataService.getHourStringRepresentations();
+  }
 
   async onTimeslotSelect(weekdayIndex: number, timeSlotIndex: number) {
     let appointment = this.getAppointment(weekdayIndex, timeSlotIndex);

@@ -33,8 +33,18 @@ export class DataService {
     ]
   };
 
+  private twelveHourRepresentation: boolean = false;
+
   constructor() {
     this.dateRanges = this.getDateRanges();
+  }
+
+  public isTwelveHourRepresentation(): boolean {
+    return this.twelveHourRepresentation;
+  }
+
+  public setTwelveHourRepresentation(value: boolean) {
+    this.twelveHourRepresentation = value;
   }
 
   public getCurrentUser () {
@@ -46,7 +56,7 @@ export class DataService {
   }
 
   public getHourStringRepresentations(): string[] {
-    return this.hourNumbers.map(number => getDate(number));
+    return this.hourNumbers.map(number => this.getHourRepresentation(number));
   }
 
   public getPhysicianName(): string {
@@ -99,13 +109,17 @@ export class DataService {
   public getSchedule(dateString: string) {
     return this.schedule[dateString] || [];
   }
-}
 
-function getDate(hourNumber: number) {
-  var date = new Date();
-  date.setHours(hourNumber);
-  date.setMinutes(0);
-  return date.toLocaleTimeString('en-US', { hour12: false, hour: "2-digit", minute: "2-digit" });
+  public getHourRepresentation(hourNumber: number) {
+    var date = new Date();
+    date.setHours(hourNumber);
+    date.setMinutes(0);
+    return date.toLocaleTimeString('en-US', { 
+      hour12: this.twelveHourRepresentation, 
+      hour: this.twelveHourRepresentation ? 'numeric' : '2-digit', 
+      minute: '2-digit' 
+    });
+  }
 }
 
 export enum UserRole {

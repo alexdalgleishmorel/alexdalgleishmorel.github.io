@@ -3,7 +3,7 @@
     <div class="spacer"></div>
     <ion-grid>
       <ion-row>
-        <ion-col><ion-toggle><ion-text color="medium">24 Hour</ion-text></ion-toggle></ion-col>
+        <ion-col><ion-toggle [(ngModel)]="hourToggleValue" (ionChange)="onHourToggleChange($event)"><ion-text color="medium">24 Hour</ion-text></ion-toggle></ion-col>
         <ion-col>MON <ion-text color="medium">{{getDateNumber(0)}}</ion-text></ion-col>
         <ion-col>TUES <ion-text color="medium">{{getDateNumber(1)}}</ion-text></ion-col>
         <ion-col>WED <ion-text color="medium">{{getDateNumber(2)}}</ion-text></ion-col>

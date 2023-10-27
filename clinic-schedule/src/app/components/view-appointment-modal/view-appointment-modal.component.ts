@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Appointment } from 'src/app/services/data.service';
+import { Appointment, DataService } from 'src/app/services/data.service';
 import { CancelAppointmentModalComponent } from '../cancel-appointment-modal/cancel-appointment-modal.component';
 
 @Component({
@@ -13,7 +13,7 @@ export class ViewAppointmentModalComponent implements OnInit {
   @Input() appointment?: Appointment;
   public disabled: boolean = true;
 
-  constructor(private modalCtrl: ModalController) {}
+  constructor(private dataService: DataService, private modalCtrl: ModalController) {}
 
   ngOnInit() {}
 
@@ -39,13 +39,13 @@ export class ViewAppointmentModalComponent implements OnInit {
     let date: Date = new Date(this.appointment.date);
     date.setHours(this.appointment.startTime);
 
-    const startTimeString = date.toLocaleTimeString('en-US', { hour12: false, hour: "2-digit", minute: "2-digit" });
+    const startTimeString = this.dataService.getHourRepresentation(date.getHours());
 
     date.setHours(this.appointment.endTime);
 
-    const endTimeString = date.toLocaleTimeString('en-US', { hour12: false, hour: "2-digit", minute: "2-digit" });
+    const endTimeString = this.dataService.getHourRepresentation(date.getHours());
 
-    return `${startTimeString}-${endTimeString}`;
+    return `${startTimeString} - ${endTimeString}`;
   }
 
   async openCancelAppointmentModal() {

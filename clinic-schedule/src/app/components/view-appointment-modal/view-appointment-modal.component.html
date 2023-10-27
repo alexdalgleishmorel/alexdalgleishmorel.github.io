@@ -26,7 +26,9 @@
               <ion-button color="secondary">UPDATE</ion-button>
               <ion-button color="danger" (click)="openCancelAppointmentModal()">REMOVE</ion-button>
             </div>
-            <ion-button color="primary">{{appointment?.status === 'SCHEDULED' ? 'CHECK-IN' : 'CHECK-OUT'}}</ion-button>
+            <ion-button color="primary" (click)="checkInOut(appointment!.status)">
+              {{getCheckInLabel()}}
+            </ion-button>
           </div>
         </div>
       </ion-card-content>

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Appointment, DataService } from 'src/app/services/data.service';
+import { Appointment, AppointmentStatus, DataService } from 'src/app/services/data.service';
 import { CancelAppointmentModalComponent } from '../cancel-appointment-modal/cancel-appointment-modal.component';
 
 @Component({
@@ -66,6 +66,23 @@ export class ViewAppointmentModalComponent implements OnInit {
 
       // then close the modal right away
       this.modalCtrl.dismiss();
+    }
+  }
+
+  public checkInOut(appointmentStatus: AppointmentStatus) {
+    if (!appointmentStatus) return;
+    if (appointmentStatus == AppointmentStatus.CHECKED_OUT || appointmentStatus == AppointmentStatus.SCHEDULED) {
+      this.appointment!.status = AppointmentStatus.CHECKED_IN;
+    } else {
+      this.appointment!.status = AppointmentStatus.CHECKED_OUT;
+    }
+  }
+
+  public getCheckInLabel(): string {
+    if (this.appointment?.status == AppointmentStatus.CHECKED_IN) {
+      return 'CHECK-OUT';
+    } else {
+      return 'CHECK-IN';
     }
   }
 }

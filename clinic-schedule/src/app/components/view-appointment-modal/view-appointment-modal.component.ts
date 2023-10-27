@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Appointment } from 'src/app/services/data.service';
+import { CancelAppointmentModalComponent } from '../cancel-appointment-modal/cancel-appointment-modal.component';
 
 @Component({
   selector: 'app-view-appointment-modal',
@@ -45,5 +46,18 @@ export class ViewAppointmentModalComponent implements OnInit {
     const endTimeString = date.toLocaleTimeString('en-US', { hour12: false, hour: "2-digit", minute: "2-digit" });
 
     return `${startTimeString}-${endTimeString}`;
+  }
+
+  async openCancelAppointmentModal() {
+    const modal = await this.modalCtrl.create({
+      component: CancelAppointmentModalComponent
+    });
+    modal.present();
+
+    const confirmed = (await modal.onWillDismiss()).data;
+
+    if (confirmed) {
+      // cancel the appointment here
+    }
   }
 }

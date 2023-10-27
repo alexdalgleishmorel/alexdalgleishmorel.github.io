@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 
+import { CancelAppointmentModalComponent } from '../components/cancel-appointment-modal/cancel-appointment-modal.component';
 import { CalendarViewComponent } from '../components/calendar-view/calendar-view.component';
 import { CreateAppointmentModalComponent } from '../components/create-appointment-modal/create-appointment-modal.component';
 import { DateSelectionModalComponent } from '../components/date-selection-modal/date-selection-modal.component';
@@ -21,6 +22,7 @@ import { ViewAppointmentModalComponent } from '../components/view-appointment-mo
   ],
   declarations: [
     HomePage,
+    CancelAppointmentModalComponent,
     CalendarViewComponent,
     CreateAppointmentModalComponent,
     DateSelectionModalComponent,

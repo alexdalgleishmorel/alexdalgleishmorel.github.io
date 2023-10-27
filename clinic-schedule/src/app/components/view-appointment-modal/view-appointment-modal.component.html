@@ -24,7 +24,7 @@
             <div class="small-spacer"></div>
             <div class="row-container">
               <ion-button color="secondary">UPDATE</ion-button>
-              <ion-button color="danger">REMOVE</ion-button>
+              <ion-button color="danger" (click)="openCancelAppointmentModal()">REMOVE</ion-button>
             </div>
             <ion-button color="primary">{{appointment?.status === 'SCHEDULED' ? 'CHECK-IN' : 'CHECK-OUT'}}</ion-button>
           </div>

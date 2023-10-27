@@ -73,7 +73,7 @@ export class CalendarViewComponent implements OnInit {
     const rawHourRepresentation = this.dataService.getRawHourRepresentations()[timeSlotIndex];
     let dailyAppointments: Appointment[] = this.dataService.getSchedule(dateString);
     for (let appointment of dailyAppointments) {
-      if (appointment.startTime >= rawHourRepresentation && appointment.endTime <= rawHourRepresentation+1) {
+      if (appointment.startTime == rawHourRepresentation || appointment.endTime == rawHourRepresentation+1) {
         return appointment;
       }
     }

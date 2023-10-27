@@ -11,7 +11,7 @@ import { ViewAppointmentModalComponent } from '../view-appointment-modal/view-ap
 })
 export class CalendarViewComponent implements OnInit {
 
-  @Input() dateIndex: number = 0;
+  @Input() dateRangeIndex: number = 0;
 
   public timeLabels: string[];
   public hourToggleValue: boolean = false;
@@ -51,14 +51,14 @@ export class CalendarViewComponent implements OnInit {
   }
 
   public getWeekdayDate(weekdayIndex: number): Date {
-    const dateString: string = this.dataService.dateRanges[this.dateIndex].startDate;
+    const dateString: string = this.dataService.dateRanges[this.dateRangeIndex].startDate;
     const date: Date = new Date(dateString);
     date.setDate(date.getDate()+weekdayIndex);
     return date;
   }
 
   public getTimeslotDate(weekdayIndex: number, timeSlotIndex: number): Date {
-    const dateString: string = this.dataService.dateRanges[this.dateIndex].startDate;
+    const dateString: string = this.dataService.dateRanges[this.dateRangeIndex].startDate;
     const date: Date = new Date(dateString);
     date.setDate(date.getDate()+weekdayIndex);
     const rawHourRepresentations: number[] = this.dataService.getRawHourRepresentations();

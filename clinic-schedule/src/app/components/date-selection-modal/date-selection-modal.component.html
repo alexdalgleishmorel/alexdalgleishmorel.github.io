@@ -2,7 +2,13 @@
   <div class="content">
     <ion-text color="medium">Select a date to move the schedule to that week.</ion-text>
     <div class="spacer"></div>
-    <ion-datetime presentation="date"></ion-datetime>
+    <ion-datetime 
+      presentation="date" 
+      [min]="minDateString" 
+      [max]="maxDateString" 
+      (ionChange)="onDateChange($event)"
+    >
+    </ion-datetime>
     <div class="spacer"></div>
     <div class="buttons-container">
       <ion-button color="light" (click)="cancel()">CANCEL</ion-button>

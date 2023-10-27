@@ -12,7 +12,7 @@ import { DateSelectionModalComponent } from '../components/date-selection-modal/
 export class HomePage {
   public userContext: SystemUser
   public physicianName: string;
-  public dateIndex: number = 52;
+  public dateRangeIndex: number = 52;
 
   constructor(private dataService: DataService, private modalCtrl: ModalController) {
     this.userContext = this.dataService.getCurrentUser();
@@ -24,18 +24,24 @@ export class HomePage {
       component: DateSelectionModalComponent,
     });
     modal.present();
+
+    const selectedDateRangeIndex = (await modal.onWillDismiss()).data;
+
+    if (selectedDateRangeIndex > 0) {
+      this.dateRangeIndex = selectedDateRangeIndex;
+    }
   }
 
   public getCurrentDateRange(): string {
-    const dateRange: DateRange = this.dataService.dateRanges[this.dateIndex];
+    const dateRange: DateRange = this.dataService.dateRanges[this.dateRangeIndex];
     return `${dateRange.startDate} - ${dateRange.endDate}`;
   }
 
   public decrementDateIndex() {
-    this.dateIndex -= this.dateIndex > 0 ? 1 : 0;
+    this.dateRangeIndex -= this.dateRangeIndex > 0 ? 1 : 0;
   }
 
   public incrementDateIndex() {
-    this.dateIndex += this.dateIndex < this.dataService.dateRanges.length - 1 ? 1 : 0;
+    this.dateRangeIndex += this.dateRangeIndex < this.dataService.dateRanges.length - 1 ? 1 : 0;
   }
 }

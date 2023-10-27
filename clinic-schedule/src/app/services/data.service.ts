@@ -28,7 +28,7 @@ export class DataService {
           phoneNumber: '123456789'
         },
         notes: '',
-        status: AppointmentStatus.SCHEDULED
+        checkedIn: false
       }
     ]
   };
@@ -141,13 +141,6 @@ export interface Patient {
   phoneNumber: string;
 }
 
-export enum AppointmentStatus {
-  SCHEDULED = 'SCHEDULED',
-  CHECKED_IN = 'CHECKED_IN',
-  CHECKED_OUT = 'CHECKED_OUT',
-  CANCELED = 'CANCELED'
-}
-
 export interface Appointment {
   date: string;
   startTime: number;
@@ -155,7 +148,7 @@ export interface Appointment {
   physicianName: string;
   patient: Patient;
   notes: string;
-  status: AppointmentStatus;
+  checkedIn: boolean;
 }
 
 export interface DateRange {

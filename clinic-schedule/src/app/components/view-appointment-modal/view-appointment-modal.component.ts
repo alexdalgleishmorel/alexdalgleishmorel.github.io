@@ -54,10 +54,18 @@ export class ViewAppointmentModalComponent implements OnInit {
     });
     modal.present();
 
+    // Wait for the confirmation modal to return a response
     const confirmed = (await modal.onWillDismiss()).data;
+
+    // Wait for the confirmation modal to completely close
+    await modal.onDidDismiss();
 
     if (confirmed) {
       // cancel the appointment here
+      // ...
+
+      // then close the modal right away
+      this.modalCtrl.dismiss();
     }
   }
 }

@@ -20,7 +20,7 @@ export class ForgotPasswordModalComponent implements OnInit {
       message: 'A password reset link has been sent to your email',
       duration: 3000,
       position: 'top',
-      cssClass: 'forgotEmailToast'
+      cssClass: 'centeredToast'
     });
 
     await toast.present();

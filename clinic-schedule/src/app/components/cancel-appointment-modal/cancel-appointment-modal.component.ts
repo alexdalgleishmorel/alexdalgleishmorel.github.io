@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cancel-appointment-modal',
@@ -8,7 +8,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class CancelAppointmentModalComponent implements OnInit {
 
-  constructor(private modalCtrl: ModalController) {}
+  constructor(private modalCtrl: ModalController, private toastController: ToastController) {}
 
   ngOnInit() {}
 
@@ -16,7 +16,16 @@ export class CancelAppointmentModalComponent implements OnInit {
     this.modalCtrl.dismiss(null);
   }
 
-  confirm() {
+  async confirm() {
+    const toast = await this.toastController.create({
+      message: 'Appointment was successfully removed from the schedule',
+      duration: 3000,
+      position: 'top',
+      color: 'success',
+      cssClass: 'centeredToast'
+    });
+
+    await toast.present();
     this.modalCtrl.dismiss(1);
   }
 }

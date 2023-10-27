@@ -62,7 +62,11 @@ export class CalendarViewComponent implements OnInit {
     const date: Date = new Date(dateString);
     date.setDate(date.getDate()+weekdayIndex);
     const rawHourRepresentations: number[] = this.dataService.getRawHourRepresentations();
-    date.setHours(date.getHours() + rawHourRepresentations[timeSlotIndex]);
+
+    let hours = Math.floor(rawHourRepresentations[timeSlotIndex])
+    let minutes = (rawHourRepresentations[timeSlotIndex] - hours)*60
+    date.setHours(date.getHours() + hours);
+    date.setMinutes(minutes)
     return date;
   }
 
@@ -80,10 +84,19 @@ export class CalendarViewComponent implements OnInit {
     const rawHourRepresentation = this.dataService.getRawHourRepresentations()[timeSlotIndex];
     let dailyAppointments: Appointment[] = this.dataService.getSchedule(dateString);
     for (let appointment of dailyAppointments) {
-      if (appointment.startTime == rawHourRepresentation || appointment.endTime == rawHourRepresentation+1) {
+      if (appointment.startTime <= rawHourRepresentation && rawHourRepresentation < appointment.endTime) {
         return appointment;
       }
+      // if (appointment.startTime == rawHourRepresentation || appointment.endTime == rawHourRepresentation+1) {
+      //   return appointment;
+      // }
     }
     return null;
+  }
+
+  calculateRowSpan(appointment: Appointment): number {
+    const durationInMinutes = (appointment.endTime - appointment.startTime) / (1000 * 60);
+    const minutesPerSlot = 30; // adjust based on time slot duration
+    return Math.ceil(durationInMinutes / minutesPerSlot);
   }
 }

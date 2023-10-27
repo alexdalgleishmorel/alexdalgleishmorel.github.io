@@ -9,6 +9,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { CalendarViewComponent } from '../components/calendar-view/calendar-view.component';
 import { CreateAppointmentModalComponent } from '../components/create-appointment-modal/create-appointment-modal.component';
 import { DateSelectionModalComponent } from '../components/date-selection-modal/date-selection-modal.component';
+import { ForgotPasswordModalComponent } from '../components/forgot-password-modal/forgot-password-modal.component';
 import { ViewAppointmentModalComponent } from '../components/view-appointment-modal/view-appointment-modal.component';
 
 @NgModule({
@@ -23,6 +24,7 @@ import { ViewAppointmentModalComponent } from '../components/view-appointment-mo
     CalendarViewComponent,
     CreateAppointmentModalComponent,
     DateSelectionModalComponent,
+    ForgotPasswordModalComponent,
     ViewAppointmentModalComponent
   ]
 })

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
+import { ForgotPasswordModalComponent } from '../forgot-password-modal/forgot-password-modal.component';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private router: Router, private toastController: ToastController) { }
+  constructor(private router: Router, private modalCtrl: ModalController) { }
 
   ngOnInit() {
   }
@@ -18,14 +19,10 @@ export class LoginPage implements OnInit {
     this.router.navigate(['home']);
   }
 
-  async forgotPassword() {
-    const toast = await this.toastController.create({
-      message: 'A password reset link has been sent to your email',
-      duration: 3000,
-      position: 'top',
-      cssClass: 'forgotEmailToast'
+  async openForgotPasswordModal() {
+    const modal = await this.modalCtrl.create({
+      component: ForgotPasswordModalComponent
     });
-
-    await toast.present();
+    modal.present();
   }
 }

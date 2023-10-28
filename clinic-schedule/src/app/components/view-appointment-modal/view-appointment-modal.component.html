@@ -11,7 +11,7 @@
               <ion-card-subtitle>{{appointment?.patient?.phoneNumber}}</ion-card-subtitle>
             </div>
             <div class="spacer"></div>
-            <ion-textarea label="NOTES" labelPlacement="floating" fill="outline" [value]="appointment?.notes">
+            <ion-textarea label="NOTES" labelPlacement="floating" fill="outline" [value]="appointment?.notes" [disabled]="true">
             </ion-textarea>
           </div>
           <div class="spacer"></div>

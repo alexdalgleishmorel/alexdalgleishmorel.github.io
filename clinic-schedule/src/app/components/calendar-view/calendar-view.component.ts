@@ -62,7 +62,11 @@ export class CalendarViewComponent implements OnInit {
     const date: Date = new Date(dateString);
     date.setDate(date.getDate()+weekdayIndex);
     const rawHourRepresentations: number[] = this.dataService.getRawHourRepresentations();
-    date.setHours(date.getHours() + rawHourRepresentations[timeSlotIndex]);
+
+    let hours = Math.floor(rawHourRepresentations[timeSlotIndex]);
+    let minutes = (rawHourRepresentations[timeSlotIndex] - hours)*60;
+    date.setHours(date.getHours() + hours);
+    date.setMinutes(minutes);
     return date;
   }
 

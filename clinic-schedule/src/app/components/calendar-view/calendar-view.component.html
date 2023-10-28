@@ -16,7 +16,7 @@
     <ion-content [scrollY]="true">
       <div class="spacer"></div>
       <ion-grid class="timeslot-grid" *ngFor="let time of timeLabels; index as i;">
-        <ion-row>
+        <ion-row [class.has-time]="time == ''">
           <ion-col class="time-label">{{time}}</ion-col>
           <ion-col (click)="onTimeslotSelect(0, i)" [ngClass]="{'isBooking': timeslotHasBooking(i, getAppointment(0, i))}">
             <div  

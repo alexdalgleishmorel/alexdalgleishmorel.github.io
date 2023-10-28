@@ -18,50 +18,106 @@
       <ion-grid class="timeslot-grid" *ngFor="let time of timeLabels; index as i;">
         <ion-row [class.has-time]="time == ''">
           <ion-col class="time-label">{{time}}</ion-col>
-          <ion-col (click)="onTimeslotSelect(0, i)">
-            <div class="appointment" *ngIf="getAppointment(0, i); let appointment">
-              <ion-text><i>{{appointment.patient.firstName}} {{appointment.patient.lastName}}</i> | </ion-text>
-              <ion-text><b>{{appointment.physicianName}}</b></ion-text>
+          <ion-col (click)="onTimeslotSelect(0, i)" [ngClass]="{'isBooking': timeslotHasBooking(i, getAppointment(0, i))}">
+            <div  
+              [ngClass]="{
+                'extend': nextTimeslotHasBooking(i, appointment), 
+                'noExtend': !nextTimeslotHasBooking(i, appointment),
+                'first': !previousTimeslotHasBooking(i, appointment)
+              }" 
+              *ngIf="getAppointment(0, i); let appointment"
+            >
+            <ion-text class="appointmentTitle" *ngIf="!previousTimeslotHasBooking(i, appointment)">
+              {{getTimeslotPatientName(appointment)}}
+            </ion-text>
             </div>
           </ion-col>
-          <ion-col (click)="onTimeslotSelect(1, i)">
-            <div class="appointment" *ngIf="getAppointment(1, i); let appointment">
-              <ion-text><i>{{appointment.patient.firstName}} {{appointment.patient.lastName}}</i> | </ion-text>
-              <ion-text><b>{{appointment.physicianName}}</b></ion-text>
+          <ion-col (click)="onTimeslotSelect(1, i)" [ngClass]="{'isBooking': timeslotHasBooking(i, getAppointment(1, i))}">
+            <div  
+              [ngClass]="{
+                'extend': nextTimeslotHasBooking(i, appointment), 
+                'noExtend': !nextTimeslotHasBooking(i, appointment),
+                'first': !previousTimeslotHasBooking(i, appointment)
+              }"
+              *ngIf="getAppointment(1, i); let appointment"
+            >
+            <ion-text class="appointmentTitle" *ngIf="!previousTimeslotHasBooking(i, appointment)">
+              {{getTimeslotPatientName(appointment)}}
+            </ion-text>
             </div>
           </ion-col>
-          <ion-col (click)="onTimeslotSelect(2, i)">
-            <div class="appointment" *ngIf="getAppointment(2, i); let appointment">
-              <ion-text><i>{{appointment.patient.firstName}} {{appointment.patient.lastName}}</i> | </ion-text>
-              <ion-text><b>{{appointment.physicianName}}</b></ion-text>
+          <ion-col (click)="onTimeslotSelect(2, i)" [ngClass]="{'isBooking': timeslotHasBooking(i, getAppointment(2, i))}">
+            <div  
+              [ngClass]="{
+                'extend': nextTimeslotHasBooking(i, appointment), 
+                'noExtend': !nextTimeslotHasBooking(i, appointment),
+                'first': !previousTimeslotHasBooking(i, appointment)
+              }" 
+              *ngIf="getAppointment(2, i); let appointment"
+            >
+            <ion-text class="appointmentTitle" *ngIf="!previousTimeslotHasBooking(i, appointment)">
+              {{getTimeslotPatientName(appointment)}}
+            </ion-text>
             </div>
           </ion-col>
-          <ion-col (click)="onTimeslotSelect(3, i)">
-            <div class="appointment" *ngIf="getAppointment(3, i); let appointment">
-              <ion-text><i>{{appointment.patient.firstName}} {{appointment.patient.lastName}}</i> | </ion-text>
-              <ion-text><b>{{appointment.physicianName}}</b></ion-text>
+          <ion-col (click)="onTimeslotSelect(3, i)" [ngClass]="{'isBooking': timeslotHasBooking(i, getAppointment(3, i))}">
+            <div  
+              [ngClass]="{
+                'extend': nextTimeslotHasBooking(i, appointment), 
+                'noExtend': !nextTimeslotHasBooking(i, appointment),
+                'first': !previousTimeslotHasBooking(i, appointment)
+              }" 
+              *ngIf="getAppointment(3, i); let appointment"
+            >
+            <ion-text class="appointmentTitle" *ngIf="!previousTimeslotHasBooking(i, appointment)">
+              {{getTimeslotPatientName(appointment)}}
+            </ion-text>
             </div>
           </ion-col>
-          <ion-col (click)="onTimeslotSelect(4, i)">
-            <div class="appointment" *ngIf="getAppointment(4, i); let appointment">
-              <ion-text><i>{{appointment.patient.firstName}} {{appointment.patient.lastName}}</i> | </ion-text>
-              <ion-text><b>{{appointment.physicianName}}</b></ion-text>
+          <ion-col (click)="onTimeslotSelect(4, i)" [ngClass]="{'isBooking': timeslotHasBooking(i, getAppointment(4, i))}">
+            <div  
+              [ngClass]="{
+                'extend': nextTimeslotHasBooking(i, appointment), 
+                'noExtend': !nextTimeslotHasBooking(i, appointment),
+                'first': !previousTimeslotHasBooking(i, appointment)
+              }" 
+              *ngIf="getAppointment(4, i); let appointment"
+            >
+            <ion-text class="appointmentTitle" *ngIf="!previousTimeslotHasBooking(i, appointment)">
+              {{getTimeslotPatientName(appointment)}}
+            </ion-text>
             </div>
           </ion-col>
-          <ion-col (click)="onTimeslotSelect(5, i)">
-            <div class="appointment" *ngIf="getAppointment(5, i); let appointment">
-              <ion-text><i>{{appointment.patient.firstName}} {{appointment.patient.lastName}}</i> | </ion-text>
-              <ion-text><b>{{appointment.physicianName}}</b></ion-text>
+          <ion-col (click)="onTimeslotSelect(5, i)" [ngClass]="{'isBooking': timeslotHasBooking(i, getAppointment(5, i))}">
+            <div  
+              [ngClass]="{
+                'extend': nextTimeslotHasBooking(i, appointment), 
+                'noExtend': !nextTimeslotHasBooking(i, appointment),
+                'first': !previousTimeslotHasBooking(i, appointment)
+              }"
+              *ngIf="getAppointment(5, i); let appointment"
+            >
+            <ion-text class="appointmentTitle" *ngIf="!previousTimeslotHasBooking(i, appointment)">
+              {{getTimeslotPatientName(appointment)}}
+            </ion-text>
             </div>
           </ion-col>
-          <ion-col (click)="onTimeslotSelect(6, i)">
-            <div class="appointment" *ngIf="getAppointment(6, i); let appointment">
-              <ion-text><i>{{appointment.patient.firstName}} {{appointment.patient.lastName}}</i> | </ion-text>
-              <ion-text><b>{{appointment.physicianName}}</b></ion-text>
+          <ion-col (click)="onTimeslotSelect(6, i)" [ngClass]="{'isBooking': timeslotHasBooking(i, getAppointment(6, i))}">
+            <div  
+              [ngClass]="{
+                'extend': nextTimeslotHasBooking(i, appointment), 
+                'noExtend': !nextTimeslotHasBooking(i, appointment),
+                'first': !previousTimeslotHasBooking(i, appointment)
+              }" 
+              *ngIf="getAppointment(6, i); let appointment"
+            >
+            <ion-text class="appointmentTitle" *ngIf="!previousTimeslotHasBooking(i, appointment)">
+              {{getTimeslotPatientName(appointment)}}
+            </ion-text>
             </div>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-content>
-  </div>  
+  </div>
 </ion-content>

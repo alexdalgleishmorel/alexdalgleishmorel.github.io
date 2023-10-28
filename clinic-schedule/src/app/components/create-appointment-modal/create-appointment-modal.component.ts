@@ -21,15 +21,10 @@ export class CreateAppointmentModalComponent implements OnInit {
 
   ngOnInit() {
     this.dateString = this.date ? this.date.toLocaleDateString() : '';
-    this.startTimeString = this.startTime ? this.dataService.getHourRepresentation(this.startTime.getHours() + this.startTime.getMinutes()/60) : '';
+    this.startTimeString = this.startTime ? this.dataService.getHourRepresentation(this.startTime.getHours()) : '';
     this.endTime = this.startTime ? new Date(this.startTime) : new Date();
-    if (this.endTime.getMinutes() === 30) {
-      this.endTime.setHours(this.endTime.getHours() + 1);
-      this.endTime.setMinutes(0);
-    } else {
-      this.endTime.setMinutes(30)
-    }
-    this.endTimeString = this.endTime ? this.dataService.getHourRepresentation(this.endTime.getHours() + this.endTime.getMinutes()/60) : '';
+    this.endTime.setHours(this.endTime.getHours()+1);
+    this.endTimeString = this.endTime ? this.dataService.getHourRepresentation(this.endTime.getHours()) : '';
   }
 
   cancel() {    

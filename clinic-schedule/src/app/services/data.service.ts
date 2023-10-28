@@ -13,7 +13,7 @@ export class DataService {
   public physician: string = 'Test Doctor';
 
   public dateRanges: DateRange[];
-  public hourNumbers: number[] = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14, 14.5, 15, 15.5, 16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5, 20];
+  public hourNumbers: number[] = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
   private schedule: {[date: string]: Appointment[]} = {
     '10/28/2023': [
@@ -55,12 +55,8 @@ export class DataService {
     return this.hourNumbers;
   }
 
-  /**
-   * Returns the timelot hour labels
-   * @returns {string[]} Each hour representation, not including the 30 minute marks
-   */
   public getHourStringRepresentations(): string[] {
-    return this.hourNumbers.map((number, index) => index % 2 === 0 ? this.getHourRepresentation(number) : '');
+    return this.hourNumbers.map(number => this.getHourRepresentation(number));
   }
 
   public getPhysicianName(): string {
@@ -116,10 +112,8 @@ export class DataService {
 
   public getHourRepresentation(hourNumber: number) {
     var date = new Date();
-    let hours = Math.floor(hourNumber)
-    let minutes = (hourNumber - hours)*60
-    date.setHours(hours);
-    date.setMinutes(minutes);
+    date.setHours(hourNumber);
+    date.setMinutes(0);
     return date.toLocaleTimeString('en-US', { 
       hour12: this.twelveHourRepresentation, 
       hour: this.twelveHourRepresentation ? 'numeric' : '2-digit', 

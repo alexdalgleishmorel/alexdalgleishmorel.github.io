@@ -37,13 +37,19 @@ export class ViewAppointmentModalComponent implements OnInit {
     if (!this.appointment) return '';
 
     let date: Date = new Date(this.appointment.date);
-    date.setHours(this.appointment.startTime);
+    let hours = Math.floor(this.appointment.startTime);
+    let minutes = (this.appointment.startTime - hours)*60;
+    date.setHours(hours);
+    date.setMinutes(minutes);
 
-    const startTimeString = this.dataService.getHourRepresentation(date.getHours());
+    const startTimeString = this.dataService.getHourRepresentation(date.getHours() + date.getMinutes()/60);
 
-    date.setHours(this.appointment.endTime);
+    hours = Math.floor(this.appointment.endTime);
+    minutes = (this.appointment.endTime - hours)*60;
+    date.setHours(hours);
+    date.setMinutes(minutes);
 
-    const endTimeString = this.dataService.getHourRepresentation(date.getHours());
+    const endTimeString = this.dataService.getHourRepresentation(date.getHours() + date.getMinutes()/60);
 
     return `${startTimeString} - ${endTimeString}`;
   }

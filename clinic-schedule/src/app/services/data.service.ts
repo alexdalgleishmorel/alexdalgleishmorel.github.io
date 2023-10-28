@@ -20,7 +20,7 @@ export class DataService {
       {
         date: '10/28/2023',
         startTime: 9,
-        endTime: 11,
+        endTime: 11.5,
         physicianName: 'Dr. Test',
         patient: {
           firstName: 'Billy',
@@ -116,8 +116,8 @@ export class DataService {
 
   public getHourRepresentation(hourNumber: number) {
     var date = new Date();
-    let hours = Math.floor(hourNumber)
-    let minutes = (hourNumber - hours)*60
+    let hours = Math.floor(hourNumber);
+    let minutes = (hourNumber - hours)*60;
     date.setHours(hours);
     date.setMinutes(minutes);
     return date.toLocaleTimeString('en-US', { 

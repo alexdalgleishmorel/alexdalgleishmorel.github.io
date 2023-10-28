@@ -80,10 +80,39 @@ export class CalendarViewComponent implements OnInit {
     const rawHourRepresentation = this.dataService.getRawHourRepresentations()[timeSlotIndex];
     let dailyAppointments: Appointment[] = this.dataService.getSchedule(dateString);
     for (let appointment of dailyAppointments) {
-      if (appointment.startTime == rawHourRepresentation || appointment.endTime == rawHourRepresentation+1) {
+      if (this.timeInRange(rawHourRepresentation, appointment)) {
         return appointment;
       }
     }
     return null;
+  }
+
+  public timeInRange(rawHourRepresentation: number, appointment: Appointment): boolean {
+    return appointment.startTime <= rawHourRepresentation && rawHourRepresentation < appointment.endTime;
+  }
+
+  public timeslotHasBooking(timeSlotIndex: number, appointment: Appointment | null) {
+    if (!appointment) return false;
+    const rawHourRepresentation = this.dataService.getRawHourRepresentations()[timeSlotIndex];
+    return this.timeInRange(rawHourRepresentation, appointment);
+  }
+
+  public nextTimeslotHasBooking(timeSlotIndex: number, appointment: Appointment) {
+    const rawHourRepresentation = this.dataService.getRawHourRepresentations()[timeSlotIndex];
+    return this.timeInRange(rawHourRepresentation+0.5, appointment);
+  }
+
+  public previousTimeslotHasBooking(timeSlotIndex: number, appointment: Appointment) {
+    const rawHourRepresentation = this.dataService.getRawHourRepresentations()[timeSlotIndex];
+    return this.timeInRange(rawHourRepresentation-0.5, appointment);
+  }
+
+  public getTimeslotPatientName(appointment: Appointment) {
+    let fullName: string = appointment.patient.firstName.concat(' ').concat(appointment.patient.lastName);
+    if (fullName.length <= 15) {
+      return fullName;
+    } else {
+      return fullName.slice(0, 15).concat('...');
+    }
   }
 }

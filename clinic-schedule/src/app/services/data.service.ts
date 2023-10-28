@@ -24,7 +24,7 @@ export class DataService {
         physicianName: 'Dr. Test',
         patient: {
           firstName: 'Billy',
-          lastName: 'Bob',
+          lastName: 'Stuartson',
           phoneNumber: '123456789'
         },
         notes: '',

@@ -16,7 +16,7 @@
     <ion-content [scrollY]="true">
       <div class="spacer"></div>
       <ion-grid class="timeslot-grid" *ngFor="let time of timeLabels; index as i;">
-        <ion-row [class.has-time]="time == ''">
+        <ion-row [ngClass]="{'has-time': !time, 'last-row': i==timeLabels.length-1}">
           <ion-col class="time-label">{{time}}</ion-col>
           <ion-col (click)="onTimeslotSelect(0, i)" [ngClass]="{'isBooking': timeslotHasBooking(i, getAppointment(0, i))}">
             <div  
@@ -118,6 +118,7 @@
           </ion-col>
         </ion-row>
       </ion-grid>
+      <div class="calendar-bottom"></div>
     </ion-content>
   </div>
 </ion-content>

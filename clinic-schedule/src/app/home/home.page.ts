@@ -11,12 +11,13 @@ import { DateSelectionModalComponent } from '../components/date-selection-modal/
 })
 export class HomePage {
   public userContext: SystemUser
-  public physicianName: string;
+  public physicianName: string = '';
+  public physicianNameList: string[];
   public dateRangeIndex: number = 52;
 
   constructor(private dataService: DataService, private modalCtrl: ModalController) {
     this.userContext = this.dataService.getCurrentUser();
-    this.physicianName = this.dataService.getPhysicianName();
+    this.physicianNameList = this.dataService.getPhysicianNameList();
   }
 
   async openCalendar() {

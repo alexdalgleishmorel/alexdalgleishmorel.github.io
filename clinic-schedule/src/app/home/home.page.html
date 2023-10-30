@@ -1,35 +1,34 @@
-<ion-content scrollY="false">
-  <ion-header>
-    <div class="toolbar">
-      <div class="toolbar-spacer"></div>
-      <ion-card class="user-context">
-        <ion-card-header>
-          <ion-card-title>{{userContext.firstName}} {{userContext.lastName}}</ion-card-title>
-          <ion-card-subtitle>{{userContext.role}}</ion-card-subtitle>
-        </ion-card-header>
-      </ion-card>
-      <div class="toolbar-spacer"></div>
-      <ion-searchbar placeholder="Physician/Nurse"></ion-searchbar>
-      <div class="toolbar-spacer"></div>
-      <ion-searchbar placeholder="Patient Name"></ion-searchbar>
-      <div class="toolbar-spacer"></div>
-      <ion-button size="small" (click)="decrementDateIndex()"><ion-icon name="chevron-back-outline"></ion-icon></ion-button>
-      <ion-title class="dateButton" (click)="openCalendar()">{{getCurrentDateRange()}}</ion-title>
-      <ion-button size="small" (click)="incrementDateIndex()"><ion-icon name="chevron-forward-outline"></ion-icon></ion-button>
-      <div class="toolbar-spacer"></div>
-    </div>
-  </ion-header>
+<ion-header>
+  <div class="toolbar">
+    <div class="toolbar-spacer"></div>
+    <ion-card class="user-context">
+      <ion-card-header>
+        <ion-card-title>{{userContext.firstName}} {{userContext.lastName}}</ion-card-title>
+        <ion-card-subtitle>{{userContext.role}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+    <div class="toolbar-spacer"></div>
+    <ion-select label="Physican Name" label-placement="floating" fill="outline" [(ngModel)]="physicianName">
+      <ion-select-option *ngFor="let name of physicianNameList" [value]="name">{{name}}</ion-select-option>
+    </ion-select>
+    <div class="toolbar-spacer"></div>
+    <ion-searchbar placeholder="Patient Name"></ion-searchbar>
+    <div class="toolbar-spacer"></div>
+    <ion-button size="small" (click)="decrementDateIndex()"><ion-icon name="chevron-back-outline"></ion-icon></ion-button>
+    <ion-title class="dateButton" (click)="openCalendar()">{{getCurrentDateRange()}}</ion-title>
+    <ion-button size="small" (click)="incrementDateIndex()"><ion-icon name="chevron-forward-outline"></ion-icon></ion-button>
+    <div class="toolbar-spacer"></div>
+  </div>
+</ion-header>
   
-  <ion-content>
-    <app-calendar-view *ngIf="physicianName else emptyCalendar" [dateRangeIndex]="dateRangeIndex"></app-calendar-view>
-  </ion-content>
-  
+<ion-content>
+  <app-calendar-view *ngIf="physicianName else emptyCalendar" [dateRangeIndex]="dateRangeIndex"></app-calendar-view>
 </ion-content>
 
 <ng-template #emptyCalendar>
   <ion-content>
     <div class="content">
-      <ion-text>PLEASE SELECT A PHYSICIAN IN THE UPPER TOOLBAR TO VIEW THE SCHEDULE</ion-text>
+      <ion-text>PLEASE SELECT A <b>PHYSICIAN NAME</b> IN THE UPPER TOOLBAR TO VIEW THE SCHEDULE</ion-text>
     </div>
   </ion-content>
 </ng-template>

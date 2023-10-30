@@ -17,8 +17,11 @@ ion-col {
     ion-row {
         height: 30px;
     }
-    ion-row.has-time ion-col:not(.time-label) {
+    ion-row.has-time:not(.last-row) ion-col:not(.time-label) {
         border-bottom: solid 1px grey;
+    }
+    ion-row.last-row ion-col:not(.time-label) {
+        border-bottom: none;
     }
     ion-col:not(.time-label) {
         border-bottom: dotted 1px lightgray; 
@@ -39,6 +42,10 @@ ion-card {
 
 .spacer {
     padding: 10px;
+}
+
+.calendar-bottom {
+    padding: 40px;
 }
 
 .extend {

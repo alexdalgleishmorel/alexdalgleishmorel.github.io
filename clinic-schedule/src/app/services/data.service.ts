@@ -10,10 +10,9 @@ export class DataService {
     role: UserRole.NURSE,
     email: 'alex@local.com'
   };
-  public physician: string = 'Test Doctor';
 
   public dateRanges: DateRange[];
-  public hourNumbers: number[] = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14, 14.5, 15, 15.5, 16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5, 20];
+  public hourNumbers: number[] = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14, 14.5, 15, 15.5, 16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5];
 
   private schedule: {[date: string]: Appointment[]} = {
     '10/28/2023': [
@@ -32,6 +31,14 @@ export class DataService {
       }
     ]
   };
+
+  private physicianNameList: string[] = [
+    'Dr. Dalgleish',
+    'Dr. Beljic',
+    'Dr. Zhang',
+    'Dr. Cameron',
+    'Dr. Tariq'
+  ];
 
   private twelveHourRepresentation: boolean = false;
 
@@ -63,8 +70,8 @@ export class DataService {
     return this.hourNumbers.map((number, index) => index % 2 === 0 ? this.getHourRepresentation(number) : '');
   }
 
-  public getPhysicianName(): string {
-    return this.physician;
+  public getPhysicianNameList(): string[] {
+    return this.physicianNameList;
   }
 
   private getDateRanges(): DateRange[] {

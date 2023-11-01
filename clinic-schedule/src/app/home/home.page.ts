@@ -57,7 +57,8 @@ export class HomePage {
       component: LogoutModalComponent,
       componentProps: {
         profile: this.dataService.getSystemUser()
-      }
+      },
+      cssClass: 'custom-modal'
     });
     modal.present();
   }

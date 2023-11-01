@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class CreateAppointmentModalComponent implements OnInit {
   public startTimeString: string = '';
   public endTimeString: string = '';
 
-  constructor(private dataService: DataService, private modalCtrl: ModalController) {}
+  constructor(private dataService: DataService, private modalCtrl: ModalController, private toastController: ToastController) {}
 
   ngOnInit() {
     this.dateString = this.date ? this.date.toLocaleDateString() : '';
@@ -36,7 +36,16 @@ export class CreateAppointmentModalComponent implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  confirm() {
+  async confirm() {
+    const toast = await this.toastController.create({
+      message: 'Appointment has been successfully created',
+      duration: 3000,
+      position: 'top',
+      color: 'success',
+      cssClass: 'centeredToast'
+    });
+
+    await toast.present();
     this.modalCtrl.dismiss();
   }
 }

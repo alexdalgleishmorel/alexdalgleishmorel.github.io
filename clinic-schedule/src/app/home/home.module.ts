@@ -11,6 +11,8 @@ import { CalendarViewComponent } from '../components/calendar-view/calendar-view
 import { CreateAppointmentModalComponent } from '../components/create-appointment-modal/create-appointment-modal.component';
 import { DateSelectionModalComponent } from '../components/date-selection-modal/date-selection-modal.component';
 import { ForgotPasswordModalComponent } from '../components/forgot-password-modal/forgot-password-modal.component';
+import { PatientNameListComponent } from '../patient-name-list/patient-name-list.component';
+import { PatientSearchModalComponent } from '../patient-search-modal/patient-search-modal.component';
 import { ViewAppointmentModalComponent } from '../components/view-appointment-modal/view-appointment-modal.component';
 
 @NgModule({
@@ -27,6 +29,8 @@ import { ViewAppointmentModalComponent } from '../components/view-appointment-mo
     CreateAppointmentModalComponent,
     DateSelectionModalComponent,
     ForgotPasswordModalComponent,
+    PatientNameListComponent,
+    PatientSearchModalComponent,
     ViewAppointmentModalComponent
   ]
 })

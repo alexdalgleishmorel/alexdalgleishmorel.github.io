@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { DataService, DateRange, SystemUser } from '../services/data.service';
 import { ModalController } from '@ionic/angular';
 import { DateSelectionModalComponent } from '../components/date-selection-modal/date-selection-modal.component';
+import { PatientSearchModalComponent } from '../patient-search-modal/patient-search-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ import { DateSelectionModalComponent } from '../components/date-selection-modal/
 })
 export class HomePage {
   public userContext: SystemUser
-  public physicianName: string = '';
+  public physicianName: string = 'test';
   public physicianNameList: string[];
   public dateRangeIndex: number = 52;
 
@@ -44,5 +45,12 @@ export class HomePage {
 
   public incrementDateIndex() {
     this.dateRangeIndex += this.dateRangeIndex < this.dataService.dateRanges.length - 1 ? 1 : 0;
+  }
+
+  async openPatientSearchModal() {
+    const modal = await this.modalCtrl.create({
+      component: PatientSearchModalComponent,
+    });
+    modal.present();
   }
 }

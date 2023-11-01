@@ -1,0 +1,18 @@
+<ion-content>
+  <ion-list [inset]="true">
+    <ion-item *ngFor="let appointment of appointments; let index">
+        <ion-label>
+            <ion-text>
+                <b>{{ appointment.patient.firstName }} {{appointment.patient.lastName}}</b>
+                <br/>
+                <sub>
+                    <ion-text color="medium">
+                      {{appointment.date}} | <b>{{getAppointmentTimeRange(appointment)}}</b>
+                    </ion-text>
+                </sub>
+            </ion-text>
+        </ion-label>
+        <br/>
+    </ion-item>
+  </ion-list>  
+</ion-content>

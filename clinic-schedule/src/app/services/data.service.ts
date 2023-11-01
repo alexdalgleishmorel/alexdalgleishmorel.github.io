@@ -29,6 +29,66 @@ export class DataService {
         notes: '',
         checkedIn: false
       }
+    ],
+    '10/31/2023': [
+      {
+        date: '10/31/2023',
+        startTime: 9,
+        endTime: 11.5,
+        physicianName: 'Dr. Test',
+        patient: {
+          firstName: 'Billy',
+          lastName: 'Stuartson',
+          phoneNumber: '123456789'
+        },
+        notes: '',
+        checkedIn: false
+      }
+    ],
+    '11/01/2023': [
+      {
+        date: '11/01/2023',
+        startTime: 12,
+        endTime: 13,
+        physicianName: 'Dr. Test',
+        patient: {
+          firstName: 'Alex',
+          lastName: 'Honold',
+          phoneNumber: '123456789'
+        },
+        notes: '',
+        checkedIn: false
+      }
+    ],
+    '11/05/2023': [
+      {
+        date: '11/05/2023',
+        startTime: 14,
+        endTime: 15.5,
+        physicianName: 'Dr. Test',
+        patient: {
+          firstName: 'John',
+          lastName: 'Smith',
+          phoneNumber: '123456789'
+        },
+        notes: '',
+        checkedIn: false
+      }
+    ],
+    '12/05/2023': [
+      {
+        date: '12/05/2023',
+        startTime: 9,
+        endTime: 13,
+        physicianName: 'Dr. Test',
+        patient: {
+          firstName: 'Lebron',
+          lastName: 'James',
+          phoneNumber: '123456789'
+        },
+        notes: '',
+        checkedIn: false
+      }
     ]
   };
 
@@ -117,8 +177,12 @@ export class DataService {
     return pastDateRanges.concat(futureDateRanges);
   }
 
-  public getSchedule(dateString: string) {
+  public getScheduleByDate(dateString: string) {
     return this.schedule[dateString] || [];
+  }
+
+  public getSchedule(): {[date: string]: Appointment[]} {
+    return this.schedule;
   }
 
   public getHourRepresentation(hourNumber: number) {

@@ -76,13 +76,13 @@ export class CalendarViewComponent implements OnInit {
   }
 
   public getDailySchedule(dateString: string): Appointment[] {
-    return this.dataService.getSchedule(dateString);
+    return this.dataService.getScheduleByDate(dateString);
   }
 
   public getAppointment(weekdayIndex: number, timeSlotIndex: number) {
     let dateString: string = this.getTimeslotDate(weekdayIndex, timeSlotIndex).toLocaleDateString('en-US');
     const rawHourRepresentation = this.dataService.getRawHourRepresentations()[timeSlotIndex];
-    let dailyAppointments: Appointment[] = this.dataService.getSchedule(dateString);
+    let dailyAppointments: Appointment[] = this.dataService.getScheduleByDate(dateString);
     for (let appointment of dailyAppointments) {
       if (this.timeInRange(rawHourRepresentation, appointment)) {
         return appointment;

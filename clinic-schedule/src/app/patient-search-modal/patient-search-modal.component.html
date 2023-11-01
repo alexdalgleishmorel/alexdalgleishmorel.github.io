@@ -1,0 +1,19 @@
+<ion-content>
+  <div class="content">
+    <ion-card-header>
+      <ion-card-subtitle class="centered">NORTHWEST MEDICAL CLINIC</ion-card-subtitle>
+      <ion-card-title class="centered">PATIENT APPOINTMENT SEARCH</ion-card-title>
+      <ion-card-content>
+        <ion-searchbar class="searchbar" placeholder="Patient Name" (ionInput)="handleSearch($event)">
+        </ion-searchbar>
+        <div class="patient-list-container">
+          <app-patient-name-list [appointments]="appointments"></app-patient-name-list>
+        </div>
+      </ion-card-content>
+      <div class="buttons-container">
+        <ion-button color="light" (click)="cancel()">BACK</ion-button>
+      </div>
+      <div class="spacer"></div>
+    </ion-card-header>
+  </div>
+</ion-content>

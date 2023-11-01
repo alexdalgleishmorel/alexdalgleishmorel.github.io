@@ -46,9 +46,9 @@ export class DataService {
         checkedIn: false
       }
     ],
-    '11/01/2023': [
+    '11/1/2023': [
       {
-        date: '11/01/2023',
+        date: '11/1/2023',
         startTime: 12,
         endTime: 13,
         physicianName: 'Dr. Test',
@@ -61,9 +61,9 @@ export class DataService {
         checkedIn: false
       }
     ],
-    '11/05/2023': [
+    '11/5/2023': [
       {
-        date: '11/05/2023',
+        date: '11/5/2023',
         startTime: 14,
         endTime: 15.5,
         physicianName: 'Dr. Test',
@@ -76,9 +76,9 @@ export class DataService {
         checkedIn: false
       }
     ],
-    '12/05/2023': [
+    '12/5/2023': [
       {
-        date: '12/05/2023',
+        date: '12/5/2023',
         startTime: 9,
         endTime: 13,
         physicianName: 'Dr. Test',

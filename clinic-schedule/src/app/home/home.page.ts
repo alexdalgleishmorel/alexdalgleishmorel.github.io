@@ -13,7 +13,7 @@ import { LogoutModalComponent } from '../logout-modal/logout-modal.component';
 })
 export class HomePage {
   public userContext: SystemUser
-  public physicianName: string = 'test';
+  public physicianName: string = '';
   public physicianNameList: string[];
   public dateRangeIndex: number = 52;
 

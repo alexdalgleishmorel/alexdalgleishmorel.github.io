@@ -4,6 +4,7 @@ import { DataService, DateRange, SystemUser } from '../services/data.service';
 import { ModalController } from '@ionic/angular';
 import { DateSelectionModalComponent } from '../components/date-selection-modal/date-selection-modal.component';
 import { PatientSearchModalComponent } from '../patient-search-modal/patient-search-modal.component';
+import { LogoutModalComponent } from '../logout-modal/logout-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -50,6 +51,16 @@ export class HomePage {
   async openPatientSearchModal() {
     const modal = await this.modalCtrl.create({
       component: PatientSearchModalComponent,
+    });
+    modal.present();
+  }
+
+  async openLogoutModal() {
+    const modal = await this.modalCtrl.create({
+      component: LogoutModalComponent,
+      componentProps: {
+        profile: this.dataService.getSystemUser()
+      }
     });
     modal.present();
   }

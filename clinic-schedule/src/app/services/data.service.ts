@@ -197,6 +197,10 @@ export class DataService {
       minute: '2-digit' 
     });
   }
+
+  public getSystemUser(): SystemUser {
+    return this.currentUser;
+  }
 }
 
 export enum UserRole {

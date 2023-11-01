@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,66 @@ export class DataService {
         notes: '',
         checkedIn: false
       }
+    ],
+    '10/31/2023': [
+      {
+        date: '10/31/2023',
+        startTime: 9,
+        endTime: 11.5,
+        physicianName: 'Dr. Test',
+        patient: {
+          firstName: 'Billy',
+          lastName: 'Stuartson',
+          phoneNumber: '123456789'
+        },
+        notes: '',
+        checkedIn: false
+      }
+    ],
+    '11/1/2023': [
+      {
+        date: '11/1/2023',
+        startTime: 12,
+        endTime: 13,
+        physicianName: 'Dr. Test',
+        patient: {
+          firstName: 'Alex',
+          lastName: 'Honold',
+          phoneNumber: '123456789'
+        },
+        notes: '',
+        checkedIn: false
+      }
+    ],
+    '11/5/2023': [
+      {
+        date: '11/5/2023',
+        startTime: 14,
+        endTime: 15.5,
+        physicianName: 'Dr. Test',
+        patient: {
+          firstName: 'John',
+          lastName: 'Smith',
+          phoneNumber: '123456789'
+        },
+        notes: '',
+        checkedIn: false
+      }
+    ],
+    '12/5/2023': [
+      {
+        date: '12/5/2023',
+        startTime: 9,
+        endTime: 13,
+        physicianName: 'Dr. Test',
+        patient: {
+          firstName: 'Lebron',
+          lastName: 'James',
+          phoneNumber: '123456789'
+        },
+        notes: '',
+        checkedIn: false
+      }
     ]
   };
 
@@ -41,6 +102,8 @@ export class DataService {
   ];
 
   private twelveHourRepresentation: boolean = false;
+
+  public dateRangeIndex: BehaviorSubject<number> = new BehaviorSubject<number>(52);
 
   constructor() {
     this.dateRanges = this.getDateRanges();
@@ -117,8 +180,12 @@ export class DataService {
     return pastDateRanges.concat(futureDateRanges);
   }
 
-  public getSchedule(dateString: string) {
+  public getScheduleByDate(dateString: string) {
     return this.schedule[dateString] || [];
+  }
+
+  public getSchedule(): {[date: string]: Appointment[]} {
+    return this.schedule;
   }
 
   public getHourRepresentation(hourNumber: number) {
@@ -132,6 +199,10 @@ export class DataService {
       hour: this.twelveHourRepresentation ? 'numeric' : '2-digit', 
       minute: '2-digit' 
     });
+  }
+
+  public getSystemUser(): SystemUser {
+    return this.currentUser;
   }
 }
 

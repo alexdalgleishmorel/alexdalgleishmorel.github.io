@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { DataService, DateRange, SystemUser } from '../services/data.service';
 import { ModalController } from '@ionic/angular';
 import { DateSelectionModalComponent } from '../components/date-selection-modal/date-selection-modal.component';
+import { PatientSearchModalComponent } from '../patient-search-modal/patient-search-modal.component';
+import { LogoutModalComponent } from '../logout-modal/logout-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +20,9 @@ export class HomePage {
   constructor(private dataService: DataService, private modalCtrl: ModalController) {
     this.userContext = this.dataService.getCurrentUser();
     this.physicianNameList = this.dataService.getPhysicianNameList();
+    this.dataService.dateRangeIndex.subscribe(index => {
+      this.dateRangeIndex = index;
+    });
   }
 
   async openCalendar() {
@@ -25,12 +30,6 @@ export class HomePage {
       component: DateSelectionModalComponent,
     });
     modal.present();
-
-    const selectedDateRangeIndex = (await modal.onWillDismiss()).data;
-
-    if (selectedDateRangeIndex > 0) {
-      this.dateRangeIndex = selectedDateRangeIndex;
-    }
   }
 
   public getCurrentDateRange(): string {
@@ -44,5 +43,22 @@ export class HomePage {
 
   public incrementDateIndex() {
     this.dateRangeIndex += this.dateRangeIndex < this.dataService.dateRanges.length - 1 ? 1 : 0;
+  }
+
+  async openPatientSearchModal() {
+    const modal = await this.modalCtrl.create({
+      component: PatientSearchModalComponent,
+    });
+    modal.present();
+  }
+
+  async openLogoutModal() {
+    const modal = await this.modalCtrl.create({
+      component: LogoutModalComponent,
+      componentProps: {
+        profile: this.dataService.getSystemUser()
+      }
+    });
+    modal.present();
   }
 }

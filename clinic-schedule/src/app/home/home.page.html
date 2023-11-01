@@ -1,7 +1,7 @@
 <ion-header>
   <div class="toolbar">
     <div class="toolbar-spacer"></div>
-    <ion-card class="user-context">
+    <ion-card (click)="openLogoutModal()" class="user-context">
       <ion-card-header>
         <ion-card-title>{{userContext.firstName}} {{userContext.lastName}}</ion-card-title>
         <ion-card-subtitle>{{userContext.role}}</ion-card-subtitle>
@@ -12,7 +12,7 @@
       <ion-select-option *ngFor="let name of physicianNameList" [value]="name">{{name}}</ion-select-option>
     </ion-select>
     <div class="toolbar-spacer"></div>
-    <ion-searchbar placeholder="Patient Name"></ion-searchbar>
+    <ion-searchbar (click)="openPatientSearchModal()" [disabled]="!physicianName" placeholder="Patient Name"></ion-searchbar>
     <div class="toolbar-spacer"></div>
     <ion-button size="small" (click)="decrementDateIndex()"><ion-icon name="chevron-back-outline"></ion-icon></ion-button>
     <ion-title class="dateButton" (click)="openCalendar()">{{getCurrentDateRange()}}</ion-title>

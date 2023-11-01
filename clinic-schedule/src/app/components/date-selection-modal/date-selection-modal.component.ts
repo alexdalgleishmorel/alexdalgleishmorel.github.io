@@ -25,7 +25,7 @@ export class DateSelectionModalComponent implements OnInit {
   ngOnInit() {}
 
   cancel() {
-    this.modalCtrl.dismiss(-1);
+    this.modalCtrl.dismiss();
   }
 
   onDateChange(dateChangeEvent: any) {
@@ -38,7 +38,8 @@ export class DateSelectionModalComponent implements OnInit {
       let endDate: Date = new Date(dateRange.endDate);
 
       if (selectedDate >= startDate && selectedDate <= endDate) {
-        this.modalCtrl.dismiss(index);
+        this.dataService.dateRangeIndex.next(index);
+        this.modalCtrl.dismiss();
         return;
       }
 

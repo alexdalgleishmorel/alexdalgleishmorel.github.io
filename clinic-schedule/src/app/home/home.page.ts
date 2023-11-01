@@ -20,6 +20,9 @@ export class HomePage {
   constructor(private dataService: DataService, private modalCtrl: ModalController) {
     this.userContext = this.dataService.getCurrentUser();
     this.physicianNameList = this.dataService.getPhysicianNameList();
+    this.dataService.dateRangeIndex.subscribe(index => {
+      this.dateRangeIndex = index;
+    });
   }
 
   async openCalendar() {
@@ -27,12 +30,6 @@ export class HomePage {
       component: DateSelectionModalComponent,
     });
     modal.present();
-
-    const selectedDateRangeIndex = (await modal.onWillDismiss()).data;
-
-    if (selectedDateRangeIndex > 0) {
-      this.dateRangeIndex = selectedDateRangeIndex;
-    }
   }
 
   public getCurrentDateRange(): string {

@@ -26,6 +26,25 @@ export class PatientSearchModalComponent implements OnInit {
     this.modalCtrl.dismiss();
   }
 
+  getAppointmentTimeRange(appointment: Appointment): string {
+    let date: Date = new Date(appointment.date);
+    let hours = Math.floor(appointment.startTime);
+    let minutes = (appointment.startTime - hours)*60;
+    date.setHours(hours);
+    date.setMinutes(minutes);
+
+    const startTimeString = this.dataService.getHourRepresentation(date.getHours() + date.getMinutes()/60);
+
+    hours = Math.floor(appointment.endTime);
+    minutes = (appointment.endTime - hours)*60;
+    date.setHours(hours);
+    date.setMinutes(minutes);
+
+    const endTimeString = this.dataService.getHourRepresentation(date.getHours() + date.getMinutes()/60);
+
+    return `${startTimeString} - ${endTimeString}`;
+  }
+
   handleSearch(event: any) {
     const searchValue = event.target.value.toLowerCase();
     this.appointments = this.unfilteredAppointments;
@@ -40,5 +59,23 @@ export class PatientSearchModalComponent implements OnInit {
       }
     );
     this.appointments = filteredData;
+  }
+
+  public onItemSelect(appointment: Appointment) {
+    let selectedDate: Date = new Date(appointment.date);
+
+    let index: number = 0;
+    for (let dateRange of this.dataService.dateRanges) {
+      let startDate: Date = new Date(dateRange.startDate);
+      let endDate: Date = new Date(dateRange.endDate);
+
+      if (selectedDate >= startDate && selectedDate <= endDate) {
+        this.dataService.dateRangeIndex.next(index);
+        this.modalCtrl.dismiss();
+        return;
+      }
+
+      index++;
+    }
   }
 }

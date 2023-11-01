@@ -7,7 +7,28 @@
         <ion-searchbar class="searchbar" placeholder="Patient Name" (ionInput)="handleSearch($event)">
         </ion-searchbar>
         <div class="patient-list-container">
-          <app-patient-name-list [appointments]="appointments"></app-patient-name-list>
+          <ion-content>
+            <ion-list [inset]="true">
+              <ion-item 
+                *ngFor="let appointment of appointments; let index"
+                class="patient-item" 
+                (click)="onItemSelect(appointment)"
+              >
+                  <ion-label>
+                      <ion-text>
+                          <b>{{ appointment.patient.firstName }} {{appointment.patient.lastName}}</b>
+                          <br/>
+                          <sub>
+                              <ion-text color="medium">
+                                {{appointment.date}} | <b>{{getAppointmentTimeRange(appointment)}}</b>
+                              </ion-text>
+                          </sub>
+                      </ion-text>
+                  </ion-label>
+                  <br/>
+              </ion-item>
+            </ion-list>  
+          </ion-content>
         </div>
       </ion-card-content>
       <div class="buttons-container">

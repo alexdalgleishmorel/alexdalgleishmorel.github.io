@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -101,6 +102,8 @@ export class DataService {
   ];
 
   private twelveHourRepresentation: boolean = false;
+
+  public dateRangeIndex: BehaviorSubject<number> = new BehaviorSubject<number>(52);
 
   constructor() {
     this.dateRanges = this.getDateRanges();

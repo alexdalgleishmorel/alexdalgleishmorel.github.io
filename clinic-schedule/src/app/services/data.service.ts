@@ -36,7 +36,7 @@ export class DataService {
         date: '10/28/2023',
         startTime: 9,
         endTime: 11.5,
-        physicianName: 'Dr. Test',
+        physicianName: 'Dr. Dalgleish',
         patient: {
           firstName: 'Billy',
           lastName: 'Stuartson',

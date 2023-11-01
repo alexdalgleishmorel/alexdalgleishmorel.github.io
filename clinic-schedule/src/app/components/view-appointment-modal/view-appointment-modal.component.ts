@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { Appointment, DataService } from 'src/app/services/data.service';
 import { CancelAppointmentModalComponent } from '../cancel-appointment-modal/cancel-appointment-modal.component';
 
@@ -13,7 +13,7 @@ export class ViewAppointmentModalComponent implements OnInit {
   @Input() appointment?: Appointment;
   public disabled: boolean = true;
 
-  constructor(private dataService: DataService, private modalCtrl: ModalController) {}
+  constructor(private dataService: DataService, private modalCtrl: ModalController, private toastController: ToastController) {}
 
   ngOnInit() {}
 
@@ -85,5 +85,18 @@ export class ViewAppointmentModalComponent implements OnInit {
     } else {
       return 'CHECK-IN';
     }
+  }
+
+  async updateAppointment() {
+    const toast = await this.toastController.create({
+      message: 'Appointment has been succesfully updated',
+      duration: 3000,
+      position: 'top',
+      color: 'primary',
+      cssClass: 'centeredToast'
+    });
+
+    await toast.present();
+    this.modalCtrl.dismiss();
   }
 }

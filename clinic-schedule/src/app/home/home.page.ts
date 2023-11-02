@@ -23,6 +23,9 @@ export class HomePage {
     this.dataService.dateRangeIndex.subscribe(index => {
       this.dateRangeIndex = index;
     });
+    this.dataService.physicianName.subscribe(name => {
+      this.physicianName = name;
+    });
   }
 
   async openCalendar() {
@@ -61,5 +64,9 @@ export class HomePage {
       cssClass: 'custom-modal'
     });
     modal.present();
+  }
+
+  public updatePhysicianName(event: any) {
+    this.dataService.updatePhysicanName(event.detail.value);
   }
 }

@@ -15,98 +15,7 @@ export class DataService {
   public dateRanges: DateRange[];
   public hourNumbers: number[] = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14, 14.5, 15, 15.5, 16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5];
 
-  private schedule: {[date: string]: Appointment[]} = {
-    '10/4/2023': [
-      {
-        date: '10/4/2023',
-        startTime: 11,
-        endTime: 11.5,
-        physicianName: 'Dr. Cameron',
-        patient: {
-          firstName: 'Alex',
-          lastName: 'Dalgleish',
-          phoneNumber: '403-111-1111'
-        },
-        notes: 'Some example notes of how patient notes will look.',
-        checkedIn: false
-      }
-    ],
-    '10/28/2023': [
-      {
-        date: '10/28/2023',
-        startTime: 9,
-        endTime: 11.5,
-        physicianName: 'Dr. Dalgleish',
-        patient: {
-          firstName: 'Billy',
-          lastName: 'Stuartson',
-          phoneNumber: '123456789'
-        },
-        notes: '',
-        checkedIn: false
-      }
-    ],
-    '10/31/2023': [
-      {
-        date: '10/31/2023',
-        startTime: 9,
-        endTime: 11.5,
-        physicianName: 'Dr. Test',
-        patient: {
-          firstName: 'Billy',
-          lastName: 'Stuartson',
-          phoneNumber: '123456789'
-        },
-        notes: '',
-        checkedIn: false
-      }
-    ],
-    '11/1/2023': [
-      {
-        date: '11/1/2023',
-        startTime: 12,
-        endTime: 13,
-        physicianName: 'Dr. Test',
-        patient: {
-          firstName: 'Alex',
-          lastName: 'Honold',
-          phoneNumber: '123456789'
-        },
-        notes: '',
-        checkedIn: false
-      }
-    ],
-    '11/5/2023': [
-      {
-        date: '11/5/2023',
-        startTime: 14,
-        endTime: 15.5,
-        physicianName: 'Dr. Test',
-        patient: {
-          firstName: 'John',
-          lastName: 'Smith',
-          phoneNumber: '123456789'
-        },
-        notes: '',
-        checkedIn: false
-      }
-    ],
-    '12/5/2023': [
-      {
-        date: '12/5/2023',
-        startTime: 9,
-        endTime: 13,
-        physicianName: 'Dr. Test',
-        patient: {
-          firstName: 'Lebron',
-          lastName: 'James',
-          phoneNumber: '123456789'
-        },
-        notes: '',
-        checkedIn: false
-      }
-    ]
-  };
+  private schedule: {[date: string]: Appointment[]} = {};
 
   private physicianNameList: string[] = [
     'Dr. Dalgleish',
@@ -119,6 +28,7 @@ export class DataService {
   private twelveHourRepresentation: boolean = false;
 
   public dateRangeIndex: BehaviorSubject<number> = new BehaviorSubject<number>(52);
+  public physicianName: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor() {
     this.dateRanges = this.getDateRanges();
@@ -147,7 +57,7 @@ export class DataService {
   public getHourStringRepresentations(): string[] {
     return this.hourNumbers.map((number, index) => index % 2 === 0 ? this.getHourRepresentation(number) : '');
   }
-  
+
   public getAllHourStringRepresentations(): string[] {
     return this.hourNumbers.map(number => this.getHourRepresentation(number));
   }
@@ -223,6 +133,55 @@ export class DataService {
   public getSystemUser(): SystemUser {
     return this.currentUser;
   }
+
+  public updatePhysicanName(name: string) {
+    this.physicianName.next(name);
+  }
+
+  public createAppointment(appointment: Appointment) {
+    this.schedule[appointment.date] ? this.schedule[appointment.date].push(appointment) : this.schedule[appointment.date] = [appointment];
+  }
+
+  public updateAppointment(appointmentToUpdate: Appointment) {
+    for (let day of Object.values(this.schedule)) {
+      for (let appointment of day) {
+        if (appointment.id === appointmentToUpdate.id) {
+          // Now we need to access the actual object to update it
+          let index = 0;
+          for (let app of this.schedule[appointment.date]) {
+            if (app.id === appointment.id) {
+              this.schedule[appointment.date][index] = appointmentToUpdate;
+              return;
+            }
+            index++;
+          }
+        }
+      }
+    }
+  }
+
+  public generateRandomString(): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=[]{}|;:,.<>?';
+    let result = '';
+  
+    for (let i = 0; i < 8; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      result += characters.charAt(randomIndex);
+    }
+  
+    return result;
+  }
+
+  public timeLabelToRawHour(timeLabel: string): number {
+    let index = 0;
+    for (let label of this.getAllHourStringRepresentations()) {
+      if (timeLabel === label) {
+        return this.getRawHourRepresentations()[index];
+      }
+      index++;
+    }
+    return -1;
+  }
 }
 
 export enum UserRole {
@@ -245,6 +204,7 @@ export interface Patient {
 }
 
 export interface Appointment {
+  id: string;
   date: string;
   startTime: number;
   endTime: number;

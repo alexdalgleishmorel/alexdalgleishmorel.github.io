@@ -33,6 +33,9 @@ export class CreateAppointmentModalComponent implements OnInit {
 
   public timeLabels: string[];
 
+  private startTimeNumber: number = 0;
+  private endTimeNumber: number = 0;
+
   constructor(
     private dataService: DataService, 
     private modalCtrl: ModalController, 
@@ -40,6 +43,14 @@ export class CreateAppointmentModalComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.timeLabels = this.dataService.getAllHourStringRepresentations();
+
+    this.startTimeFormControl.valueChanges.subscribe(startTime => {
+      this.startTimeNumber = this.dataService.timeLabelToRawHour(startTime);
+    });
+
+    this.endTimeFormControl.valueChanges.subscribe(endTime => {
+      this.endTimeNumber = this.dataService.timeLabelToRawHour(endTime);
+    });
   }
 
   ngOnInit() {
@@ -53,6 +64,7 @@ export class CreateAppointmentModalComponent implements OnInit {
   private initNewAppointment() {
     const dateString = this.date ? this.date.toLocaleDateString() : '';
     const startTimeString = this.startTime ? this.dataService.getHourRepresentation(this.startTime.getHours() + this.startTime.getMinutes()/60) : '';
+    this.startTimeNumber = this.startTime!.getHours();
     const endTime = this.startTime ? new Date(this.startTime) : new Date();
     if (endTime.getMinutes() === 30) {
       endTime.setHours(endTime.getHours() + 1);
@@ -61,6 +73,7 @@ export class CreateAppointmentModalComponent implements OnInit {
       endTime.setMinutes(30)
     }
     const endTimeString = this.dataService.getHourRepresentation(endTime.getHours() + endTime.getMinutes()/60);
+    this.endTimeNumber = endTime.getHours() + endTime.getMinutes()/60;
 
     this.dateString = dateString;
     this.startTimeFormControl.setValue(startTimeString);
@@ -70,7 +83,9 @@ export class CreateAppointmentModalComponent implements OnInit {
   private initExistingAppointment(appointment: Appointment) {
     this.dateString = appointment.date;
     this.startTimeFormControl.setValue(this.dataService.getHourRepresentation(appointment.startTime));
+    this.startTimeNumber = appointment.startTime;
     this.endTimeFormControl.setValue(this.dataService.getHourRepresentation(appointment.endTime));
+    this.endTimeNumber = appointment.endTime;
     this.firstNameFormControl.setValue(appointment.patient.firstName);
     this.lastNameFormControl.setValue(appointment.patient.lastName);
     this.phoneNumberFormControl.setValue(appointment.patient.phoneNumber);
@@ -82,7 +97,24 @@ export class CreateAppointmentModalComponent implements OnInit {
   }
 
   async confirm() {
+    const generatedAppointment: Appointment = {
+      id: this.appointment ? this.appointment.id : this.dataService.generateRandomString(),
+      date: this.dateString,
+      startTime: this.startTimeNumber,
+      endTime: this.endTimeNumber,
+      patient: {
+        firstName: this.firstNameFormControl.getRawValue(),
+        lastName: this.lastNameFormControl.getRawValue(),
+        phoneNumber: this.phoneNumberFormControl.getRawValue()
+      },
+      physicianName: this.dataService.physicianName.getValue(),
+      notes: this.notesFormControl.getRawValue(),
+      checkedIn: false
+    };
+
     if (!this.appointment) {
+      this.dataService.createAppointment(generatedAppointment);
+
       const toast = await this.toastController.create({
         message: 'Appointment has been successfully created',
         duration: 3000,
@@ -90,8 +122,9 @@ export class CreateAppointmentModalComponent implements OnInit {
         color: 'success',
         cssClass: 'centeredToast'
       });
-  
       await toast.present();
+    } else {
+      this.dataService.updateAppointment(generatedAppointment);
     }
 
     this.modalCtrl.dismiss(true);
@@ -105,5 +138,25 @@ export class CreateAppointmentModalComponent implements OnInit {
       && this.firstNameFormControl.getRawValue() 
       && this.lastNameFormControl.getRawValue() 
       && this.phoneNumberFormControl.getRawValue();
+  }
+
+  public getStartTimes(): string[] {
+    let timeLabels = [];
+    for (let i = 0; i < this.timeLabels.length; i++) {
+      if (this.dataService.timeLabelToRawHour(this.timeLabels[i]) < this.endTimeNumber) {
+        timeLabels.push(this.timeLabels[i]);
+      }
+    }
+    return timeLabels;
+  }
+
+  public getEndTimes(): string[] {
+    let timeLabels = [];
+    for (let i = this.timeLabels.length-1; i >= 0; i--) {
+      if (this.dataService.timeLabelToRawHour(this.timeLabels[i]) > this.startTimeNumber) {
+        timeLabels.push(this.timeLabels[i]);
+      }
+    }
+    return timeLabels.reverse();
   }
 }

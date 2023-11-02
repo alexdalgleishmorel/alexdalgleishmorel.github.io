@@ -8,7 +8,7 @@
       </ion-card-header>
     </ion-card>
     <div class="toolbar-spacer"></div>
-    <ion-select [label]="!physicianName ? 'Select a physician name' : 'Physician Name'" label-placement="floating" fill="outline" [(ngModel)]="physicianName">
+    <ion-select [label]="!physicianName ? 'Select a physician name' : 'Physician Name'" label-placement="floating" fill="outline" [(ngModel)]="physicianName" (ionChange)="updatePhysicianName($event)">
       <ion-select-option *ngFor="let name of physicianNameList" [value]="name">{{name}}</ion-select-option>
     </ion-select>
     <div class="toolbar-spacer"></div>

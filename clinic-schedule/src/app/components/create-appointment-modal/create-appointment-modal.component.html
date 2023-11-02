@@ -5,27 +5,27 @@
       <ion-card-title class="centered">APPOINTMENT BOOKING</ion-card-title>
       <ion-card-content>
         <div class="time-container">
-          <ion-input labelPlacement="stacked" label="DATE" [value]="dateString" [disabled]="true"></ion-input>
-          <ion-input labelPlacement="stacked" label="START TIME" [value]="startTimeString" [disabled]="true"></ion-input>
-          <ion-input labelPlacement="stacked" label="END TIME" [value]="endTimeString" [disabled]="true"></ion-input>
+          <ion-input labelPlacement="stacked" label="DATE" [formControl]="dateFormControl"></ion-input>
+          <ion-input labelPlacement="stacked" label="START TIME" [formControl]="startTimeFormControl"></ion-input>
+          <ion-input labelPlacement="stacked" label="END TIME" [formControl]="endTimeFormControl"></ion-input>
         </div>
         <div class="spacer"></div>
         <div class="name-container">
-          <ion-input labelPlacement="stacked" label="FIRST NAME" placeholder="Patient first name" errorText="Required"></ion-input>
+          <ion-input labelPlacement="stacked" label="FIRST NAME" placeholder="Patient first name" errorText="Required" [formControl]="firstNameFormControl"></ion-input>
           <div class="spacer"></div>
-          <ion-input labelPlacement="stacked" label="LAST NAME" placeholder="Patient last name" errorText="Required"></ion-input>
+          <ion-input labelPlacement="stacked" label="LAST NAME" placeholder="Patient last name" errorText="Required" [formControl]="lastNameFormControl"></ion-input>
           <div class="spacer"></div>
-          <ion-input labelPlacement="stacked" label="PHONE NUMBER" type="tel" placeholder="888-888-8888" errorText="Required"></ion-input>
+          <ion-input labelPlacement="stacked" label="PHONE NUMBER" type="tel" placeholder="888-888-8888" errorText="Required" [formControl]="phoneNumberFormControl"></ion-input>
         </div>
         <div class="spacer"></div>
-        <ion-textarea label="NOTES" labelPlacement="floating" fill="outline" placeholder="Enter additional patient information">
+        <ion-textarea label="NOTES" labelPlacement="floating" fill="outline" placeholder="Enter additional patient information" [formControl]="notesFormControl">
         </ion-textarea>
       </ion-card-content>
     </ion-card-header>
     <div class="buttons-container">
       <ion-button color="light" (click)="cancel()">CANCEL</ion-button>
       <div class="spacer"></div>
-      <ion-button color="primary" (click)="confirm()">CONFIRM</ion-button>
+      <ion-button color="primary" (click)="confirm()" [disabled]="!canConfirmAppointment()">CONFIRM</ion-button>
     </div>
     <div class="spacer"></div>
   </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
 import { ForgotPasswordModalComponent } from '../forgot-password-modal/forgot-password-modal.component';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,19 @@ import { ForgotPasswordModalComponent } from '../forgot-password-modal/forgot-pa
 })
 export class LoginPage implements OnInit {
 
-  constructor(private router: Router, private modalCtrl: ModalController) { }
+  public usernameFormControl: FormControl<string> = new FormControl();
+  public passwordFormControl: FormControl<string> = new FormControl();
+
+  public formGroup: FormGroup = this.formBuilder.group({
+    usernameFormControl: this.usernameFormControl,
+    passwordFormControl: this.passwordFormControl
+  });
+
+  constructor(
+    private router: Router, 
+    private modalCtrl: ModalController,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit() {
   }
@@ -24,5 +37,9 @@ export class LoginPage implements OnInit {
       component: ForgotPasswordModalComponent
     });
     modal.present();
+  }
+
+  canLogin(): boolean {
+    return this.formGroup.valid && !!this.usernameFormControl.getRawValue() && !!this.passwordFormControl.getRawValue();
   }
 }

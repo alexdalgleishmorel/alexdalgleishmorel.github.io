@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Appointment, DataService } from 'src/app/services/data.service';
 import { CancelAppointmentModalComponent } from '../cancel-appointment-modal/cancel-appointment-modal.component';
+import { CreateAppointmentModalComponent } from '../create-appointment-modal/create-appointment-modal.component';
 
 @Component({
   selector: 'app-view-appointment-modal',
@@ -88,15 +89,29 @@ export class ViewAppointmentModalComponent implements OnInit {
   }
 
   async updateAppointment() {
-    const toast = await this.toastController.create({
-      message: 'Appointment has been succesfully updated',
-      duration: 3000,
-      position: 'top',
-      color: 'primary',
-      cssClass: 'centeredToast'
+    const modal = await this.modalCtrl.create({
+      component: CreateAppointmentModalComponent,
+      componentProps: {
+        appointment: this.appointment
+      }
     });
+    modal.present();
 
-    await toast.present();
-    this.modalCtrl.dismiss();
+    const confirmed = (await modal.onWillDismiss()).data;
+
+    await modal.onDidDismiss();
+
+    if (confirmed) {
+      const toast = await this.toastController.create({
+        message: 'Appointment has been succesfully updated',
+        duration: 3000,
+        position: 'top',
+        color: 'primary',
+        cssClass: 'centeredToast'
+      });
+  
+      await toast.present();
+      this.modalCtrl.dismiss();
+    }
   }
 }

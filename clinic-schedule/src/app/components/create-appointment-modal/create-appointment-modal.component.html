@@ -5,9 +5,15 @@
       <ion-card-title class="centered">APPOINTMENT BOOKING</ion-card-title>
       <ion-card-content>
         <div class="time-container">
-          <ion-input labelPlacement="stacked" label="DATE" [formControl]="dateFormControl"></ion-input>
-          <ion-input labelPlacement="stacked" label="START TIME" [formControl]="startTimeFormControl"></ion-input>
-          <ion-input labelPlacement="stacked" label="END TIME" [formControl]="endTimeFormControl"></ion-input>
+          <ion-input labelPlacement="stacked" label="DATE" [value]="dateString" [disabled]="true"></ion-input>
+          <div class="spacer"></div>
+          <ion-select label="START TIME" label-placement="floating" fill="outline" [formControl]="startTimeFormControl">
+            <ion-select-option *ngFor="let time of timeLabels" [value]="time">{{time}}</ion-select-option>
+          </ion-select>
+          <div class="spacer"></div>
+          <ion-select label="END TIME" label-placement="floating" fill="outline" [formControl]="endTimeFormControl">
+            <ion-select-option *ngFor="let time of timeLabels" [value]="time">{{time}}</ion-select-option>
+          </ion-select>
         </div>
         <div class="spacer"></div>
         <div class="name-container">

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Appointment, DataService } from 'src/app/services/data.service';
 
@@ -14,7 +14,7 @@ export class CreateAppointmentModalComponent implements OnInit {
   @Input() startTime?: Date;
   @Input() appointment?: Appointment;
 
-  public dateFormControl: FormControl = new FormControl();
+  public dateString: string = '';
   public startTimeFormControl: FormControl = new FormControl();
   public endTimeFormControl: FormControl = new FormControl();
   public firstNameFormControl: FormControl = new FormControl();
@@ -23,7 +23,6 @@ export class CreateAppointmentModalComponent implements OnInit {
   public notesFormControl: FormControl = new FormControl();
 
   public formGroup: FormGroup = this.formBuilder.group({
-    dateFormControl: this.dateFormControl,
     startTimeFormControl: this.startTimeFormControl,
     endTimeFormControl: this.endTimeFormControl,
     firstNameFormControl: this.firstNameFormControl,
@@ -32,18 +31,22 @@ export class CreateAppointmentModalComponent implements OnInit {
     notesFormControl: this.notesFormControl
   });
 
+  public timeLabels: string[];
+
   constructor(
     private dataService: DataService, 
     private modalCtrl: ModalController, 
     private toastController: ToastController,
     private formBuilder: FormBuilder
-  ) {}
+  ) {
+    this.timeLabels = this.dataService.getAllHourStringRepresentations();
+  }
 
   ngOnInit() {
     if (!this.appointment) {
       this.initNewAppointment();
     } else {
-      this.initExistingAppointment();
+      this.initExistingAppointment(this.appointment);
     }
   }
 
@@ -59,34 +62,44 @@ export class CreateAppointmentModalComponent implements OnInit {
     }
     const endTimeString = this.dataService.getHourRepresentation(endTime.getHours() + endTime.getMinutes()/60);
 
-    this.dateFormControl.setValue(dateString);
+    this.dateString = dateString;
     this.startTimeFormControl.setValue(startTimeString);
     this.endTimeFormControl.setValue(endTimeString);
   }
 
-  private initExistingAppointment() {
+  private initExistingAppointment(appointment: Appointment) {
+    this.dateString = appointment.date;
+    this.startTimeFormControl.setValue(this.dataService.getHourRepresentation(appointment.startTime));
+    this.endTimeFormControl.setValue(this.dataService.getHourRepresentation(appointment.endTime));
+    this.firstNameFormControl.setValue(appointment.patient.firstName);
+    this.lastNameFormControl.setValue(appointment.patient.lastName);
+    this.phoneNumberFormControl.setValue(appointment.patient.phoneNumber);
+    this.notesFormControl.setValue(appointment.notes);
   }
 
   cancel() {    
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss(false);
   }
 
   async confirm() {
-    const toast = await this.toastController.create({
-      message: 'Appointment has been successfully created',
-      duration: 3000,
-      position: 'top',
-      color: 'success',
-      cssClass: 'centeredToast'
-    });
+    if (!this.appointment) {
+      const toast = await this.toastController.create({
+        message: 'Appointment has been successfully created',
+        duration: 3000,
+        position: 'top',
+        color: 'success',
+        cssClass: 'centeredToast'
+      });
+  
+      await toast.present();
+    }
 
-    await toast.present();
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss(true);
   }
 
   public canConfirmAppointment(): boolean {
     return this.formGroup.valid 
-      && this.dateFormControl.getRawValue() 
+      && !this.formGroup.pristine
       && this.startTimeFormControl.getRawValue() 
       && this.endTimeFormControl.getRawValue() 
       && this.firstNameFormControl.getRawValue() 

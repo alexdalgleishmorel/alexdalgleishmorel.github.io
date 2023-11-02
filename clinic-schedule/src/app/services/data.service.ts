@@ -147,6 +147,10 @@ export class DataService {
   public getHourStringRepresentations(): string[] {
     return this.hourNumbers.map((number, index) => index % 2 === 0 ? this.getHourRepresentation(number) : '');
   }
+  
+  public getAllHourStringRepresentations(): string[] {
+    return this.hourNumbers.map(number => this.getHourRepresentation(number));
+  }
 
   public getPhysicianNameList(): string[] {
     return this.physicianNameList;

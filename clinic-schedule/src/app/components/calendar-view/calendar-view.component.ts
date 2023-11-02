@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CreateAppointmentModalComponent } from '../create-appointment-modal/create-appointment-modal.component';
 import { Appointment, DataService, DateRange } from 'src/app/services/data.service';
@@ -16,12 +16,16 @@ export class CalendarViewComponent implements OnInit {
   public timeLabels: string[];
   public hourToggleValue: boolean = false;
 
-  constructor(private dataService: DataService, private modalCtrl: ModalController) {
+  constructor(private dataService: DataService, private modalCtrl: ModalController, private changeDetector: ChangeDetectorRef) {
     this.timeLabels = this.dataService.getHourStringRepresentations();
     this.hourToggleValue = this.dataService.isTwelveHourRepresentation();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.dataService.scheduleUpdate.subscribe(() => {
+      this.changeDetector.detectChanges();
+    });
+  }
 
   public onHourToggleChange(event: any) {
     this.dataService.setTwelveHourRepresentation(event.detail.checked);
@@ -84,6 +88,9 @@ export class CalendarViewComponent implements OnInit {
     const rawHourRepresentation = this.dataService.getRawHourRepresentations()[timeSlotIndex];
     let dailyAppointments: Appointment[] = this.dataService.getScheduleByDate(dateString);
     for (let appointment of dailyAppointments) {
+      if (!appointment) {
+        continue;
+      }
       if (this.timeInRange(rawHourRepresentation, appointment)) {
         return appointment;
       }

@@ -3,6 +3,7 @@ import { ModalController, ToastController } from '@ionic/angular';
 import { Appointment, DataService } from 'src/app/services/data.service';
 import { CancelAppointmentModalComponent } from '../cancel-appointment-modal/cancel-appointment-modal.component';
 import { CreateAppointmentModalComponent } from '../create-appointment-modal/create-appointment-modal.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-appointment-modal',
@@ -14,7 +15,12 @@ export class ViewAppointmentModalComponent implements OnInit {
   @Input() appointment?: Appointment;
   public disabled: boolean = true;
 
-  constructor(private dataService: DataService, private modalCtrl: ModalController, private toastController: ToastController) {}
+  constructor(
+    private dataService: DataService, 
+    private modalCtrl: ModalController, 
+    private toastController: ToastController,
+    private router: Router
+  ) {}
 
   ngOnInit() {}
 
@@ -56,6 +62,8 @@ export class ViewAppointmentModalComponent implements OnInit {
   }
 
   async openCancelAppointmentModal() {
+    if (!this.appointment) return;
+
     const modal = await this.modalCtrl.create({
       component: CancelAppointmentModalComponent
     });
@@ -68,8 +76,8 @@ export class ViewAppointmentModalComponent implements OnInit {
     await modal.onDidDismiss();
 
     if (confirmed) {
-      // cancel the appointment here
-      // ...
+      this.dataService.cancelAppointment(this.appointment);
+      this.dataService.scheduleUpdate.next(true);
 
       // then close the modal right away
       this.modalCtrl.dismiss();

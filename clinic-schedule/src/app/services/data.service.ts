@@ -29,6 +29,7 @@ export class DataService {
 
   public dateRangeIndex: BehaviorSubject<number> = new BehaviorSubject<number>(52);
   public physicianName: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public scheduleUpdate: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor() {
     this.dateRanges = this.getDateRanges();
@@ -151,6 +152,24 @@ export class DataService {
           for (let app of this.schedule[appointment.date]) {
             if (app.id === appointment.id) {
               this.schedule[appointment.date][index] = appointmentToUpdate;
+              return;
+            }
+            index++;
+          }
+        }
+      }
+    }
+  }
+
+  public cancelAppointment(appointmentToUpdate: Appointment) {
+    for (let day of Object.values(this.schedule)) {
+      for (let appointment of day) {
+        if (appointment.id === appointmentToUpdate.id) {
+          // Now we need to access the actual object to update it
+          let index = 0;
+          for (let app of this.schedule[appointment.date]) {
+            if (app.id === appointment.id) {
+              delete this.schedule[appointment.date][index];
               return;
             }
             index++;

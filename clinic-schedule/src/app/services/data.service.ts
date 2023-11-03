@@ -15,7 +15,88 @@ export class DataService {
   public dateRanges: DateRange[];
   public hourNumbers: number[] = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14, 14.5, 15, 15.5, 16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5];
 
-  private schedule: {[date: string]: Appointment[]} = {};
+  private schedule: {[date: string]: Appointment[]} = {
+    '11/11/2023': [
+      {
+        id: '%*bvxdvb',
+        date: '11/11/2023',
+        physicianName: 'Dr. Dalgleish',
+        patient: {
+          firstName: 'Steven',
+          lastName: 'Smith',
+          phoneNumber: '(403)-123-4567'
+        },
+        startTime: 11,
+        endTime: 12.5,
+        notes: '',
+        checkedIn: false
+      }
+    ],
+    '11/13/2023': [
+      {
+        id: 'vskjvalse',
+        date: '11/13/2023',
+        physicianName: 'Dr. Beljic',
+        patient: {
+          firstName: 'Alex',
+          lastName: 'Jameson',
+          phoneNumber: '(403)-333-4537'
+        },
+        startTime: 10,
+        endTime: 11.5,
+        notes: '',
+        checkedIn: false
+      }
+    ],
+    '11/19/2023': [
+      {
+        id: '*(@!svsv',
+        date: '11/19/2023',
+        physicianName: 'Dr. Cameron',
+        patient: {
+          firstName: 'Lisa',
+          lastName: 'Moss',
+          phoneNumber: '(403)-123-9999'
+        },
+        startTime: 11,
+        endTime: 13,
+        notes: '',
+        checkedIn: false
+      }
+    ],
+    '11/25/2023': [
+      {
+        id: 'a%^7sgw',
+        date: '11/25/2023',
+        physicianName: 'Dr. Dalgleish',
+        patient: {
+          firstName: 'Brook',
+          lastName: 'Lopez',
+          phoneNumber: '(403)-321-7654'
+        },
+        startTime: 13,
+        endTime: 15,
+        notes: '',
+        checkedIn: false
+      }
+    ],
+    '11/29/2023': [
+      {
+        id: '&*23dvcv',
+        date: '11/29/2023',
+        physicianName: 'Dr. Dalgleish',
+        patient: {
+          firstName: 'Kyrie',
+          lastName: 'Irving',
+          phoneNumber: '(403)-777-1352'
+        },
+        startTime: 11.5,
+        endTime: 14,
+        notes: '',
+        checkedIn: false
+      }
+    ]
+  };
 
   private physicianNameList: string[] = [
     'Dr. Dalgleish',

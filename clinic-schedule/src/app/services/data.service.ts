@@ -6,10 +6,10 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DataService {
   public currentUser: SystemUser = {
-    firstName: 'Alex',
-    lastName: 'Dalgleish',
-    role: UserRole.NURSE,
-    email: 'alex@local.com'
+    firstName: '',
+    lastName: '',
+    role: UserRole.BLANK,
+    email: ''
   };
 
   public dateRanges: DateRange[];
@@ -282,12 +282,62 @@ export class DataService {
     }
     return -1;
   }
+
+  updateCurrentUser(enteredUsername: string, enteredPassword: string) {
+
+    let updatedUser: SystemUser | undefined;
+  
+    if (enteredUsername === 'alex' && enteredPassword === 'qwerty') {
+      updatedUser = {
+        firstName: 'Alex',
+        lastName: 'Dalgleish',
+        role: UserRole.NURSE,
+        email: 'alex@gmail.com'
+      };
+    } else if (enteredUsername === 'bryant' && enteredPassword === 'qwerty') {
+      updatedUser = {
+        firstName: 'Bryant',
+        lastName: 'Zhang',
+        role: UserRole.RECEPTIONIST,
+        email: 'bryant@gmail.com'
+      };
+    } else if (enteredUsername === 'gabriel' && enteredPassword === 'qwerty') {
+      updatedUser = {
+        firstName: 'Gabriel',
+        lastName: 'Cameron',
+        role: UserRole.NURSE,
+        email: 'gabriel@gmail.com'
+      };
+    } else if (enteredUsername === 'stevan' && enteredPassword === 'qwerty') {
+      updatedUser = {
+        firstName: 'Stevan',
+        lastName: 'Beljic',
+        role: UserRole.PHYSICIAN,
+        email: 'stevan@gmail.com'
+      };
+    } else if (enteredUsername === 'umair' && enteredPassword === 'qwerty') {
+      updatedUser = {
+        firstName: 'Umair',
+        lastName: 'Tariq',
+        role: UserRole.RECEPTIONIST,
+        email: 'umair@gmail.com'
+      };
+    }
+
+    if (updatedUser) {
+      this.currentUser = updatedUser;
+    }
+
+  }
+  
+
 }
 
 export enum UserRole {
   NURSE = 'NURSE',
   PHYSICIAN = 'PHYSICIAN',
-  RECEPTIONIST = 'RECEPTIONIST'
+  RECEPTIONIST = 'RECEPTIONIST',
+  BLANK = ''
 }
 
 export interface SystemUser {

@@ -28,6 +28,14 @@ export class HomePage {
     });
   }
 
+  shouldShowCalendar(): boolean {
+    return !!this.physicianName;
+  }
+
+  private navigateToEmptyCalendar() {
+    this.physicianName = '';
+  }
+
   async openCalendar() {
     const modal = await this.modalCtrl.create({
       component: DateSelectionModalComponent,
@@ -68,5 +76,9 @@ export class HomePage {
 
   public updatePhysicianName(event: any) {
     this.dataService.updatePhysicanName(event.detail.value);
+  }
+
+  ngOnInit() {
+    this.navigateToEmptyCalendar();
   }
 }

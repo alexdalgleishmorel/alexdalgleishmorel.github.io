@@ -1,8 +1,12 @@
 <ion-content>
   <div class="content">
     <ion-card-header>
-      <ion-card-subtitle class="centered">NORTHWEST MEDICAL CLINIC</ion-card-subtitle>
-      <ion-card-title class="centered">MY PROFILE</ion-card-title>
+      <ion-card-subtitle class="centered spaced-subtitle">NORTHWEST MEDICAL CLINIC</ion-card-subtitle>
+      <ion-card-title class="centered">
+        <div class="name">{{ profile?.firstName }} {{ profile?.lastName }}</div>
+        <div class="small-font role">{{ profile?.role }}</div>
+        <div class="small-font email light-text">{{ profile?.email }}</div>
+      </ion-card-title>
     </ion-card-header>
     <div class="buttons-container">
       <ion-button color="light" (click)="cancel()">CANCEL</ion-button>
@@ -12,3 +16,30 @@
     <div class="spacer"></div>
   </div>
 </ion-content>
+
+<style>
+  .small-font {
+    font-size: 0.8em;
+  }
+
+  .name {
+    margin-bottom: 8px;
+  }
+
+  .role {
+    color: #696969;
+  }
+
+  .email {
+    margin-top: 8px;
+    margin-bottom: 2px;
+  }
+
+  .light-text {
+    color: #969696;
+  }
+
+  .spaced-subtitle {
+    margin-bottom: 8px;
+  }
+</style>

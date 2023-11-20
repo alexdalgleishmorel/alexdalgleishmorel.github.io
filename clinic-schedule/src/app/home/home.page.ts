@@ -18,7 +18,7 @@ export class HomePage {
   public dateRangeIndex: number = 52;
 
   constructor(private dataService: DataService, private modalCtrl: ModalController) {
-    this.userContext = this.dataService.getCurrentUser();
+    this.userContext = this.dataService.getCurrentUser()!;
     this.physicianNameList = this.dataService.getPhysicianNameList();
     this.dataService.dateRangeIndex.subscribe(index => {
       this.dateRangeIndex = index;
@@ -26,14 +26,6 @@ export class HomePage {
     this.dataService.physicianName.subscribe(name => {
       this.physicianName = name;
     });
-  }
-
-  shouldShowCalendar(): boolean {
-    return !!this.physicianName;
-  }
-
-  private navigateToEmptyCalendar() {
-    this.physicianName = '';
   }
 
   async openCalendar() {
@@ -76,9 +68,5 @@ export class HomePage {
 
   public updatePhysicianName(event: any) {
     this.dataService.updatePhysicanName(event.detail.value);
-  }
-
-  ngOnInit() {
-    this.navigateToEmptyCalendar();
   }
 }

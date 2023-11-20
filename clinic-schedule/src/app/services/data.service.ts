@@ -5,12 +5,10 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
-  public currentUser: SystemUser = {
-    firstName: '',
-    lastName: '',
-    role: UserRole.BLANK,
-    email: ''
-  };
+  public currentUser?: SystemUser;
+
+  private loggedIn$ = new BehaviorSubject<boolean>(!!this.currentUser);
+  public isLoggedIn$ = this.loggedIn$.asObservable();
 
   public dateRanges: DateRange[];
   public hourNumbers: number[] = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14, 14.5, 15, 15.5, 16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5];
@@ -212,8 +210,8 @@ export class DataService {
     });
   }
 
-  public getSystemUser(): SystemUser {
-    return this.currentUser;
+  public getSystemUser(): SystemUser | null {
+    return this.currentUser || null;
   }
 
   public updatePhysicanName(name: string) {
@@ -326,11 +324,14 @@ export class DataService {
 
     if (updatedUser) {
       this.currentUser = updatedUser;
+      this.loggedIn$.next(true);
     }
-
   }
-  
 
+  public removeCurrentUser() {
+    this.currentUser = undefined;
+    this.loggedIn$.next(false);
+  }
 }
 
 export enum UserRole {

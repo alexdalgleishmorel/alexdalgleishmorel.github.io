@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { SystemUser } from '../services/data.service';
+import { DataService, SystemUser } from '../services/data.service';
 
 @Component({
   selector: 'app-logout-modal',
@@ -11,7 +11,7 @@ import { SystemUser } from '../services/data.service';
 export class LogoutModalComponent implements OnInit {
   @Input() profile?: SystemUser;
 
-  constructor(private modalCtrl: ModalController, private router: Router) {}
+  constructor(private dataService: DataService, private modalCtrl: ModalController, private router: Router) {}
 
   ngOnInit() {}
 
@@ -20,6 +20,8 @@ export class LogoutModalComponent implements OnInit {
   }
 
   logout() {
+    this.dataService.removeCurrentUser();
+    this.dataService.updatePhysicanName('');
     this.router.navigate(['/login']);
     this.modalCtrl.dismiss();
   }

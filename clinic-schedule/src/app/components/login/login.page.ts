@@ -5,8 +5,6 @@ import { ForgotPasswordModalComponent } from '../forgot-password-modal/forgot-pa
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DataService } from '../../services/data.service';
 
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -57,7 +55,9 @@ export class LoginPage implements OnInit {
     const toast = await this.toastController.create({
       message: message,
       duration: 2000,
-      position: 'top'
+      position: 'top',
+      color: 'danger',
+      cssClass: 'centeredToast'
     });
     toast.present();
   }

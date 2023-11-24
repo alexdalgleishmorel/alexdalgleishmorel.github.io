@@ -4,6 +4,7 @@
       <ion-card-subtitle class="centered">NORTHWEST MEDICAL CLINIC</ion-card-subtitle>
       <ion-card-title class="centered">APPOINTMENT BOOKING</ion-card-title>
       <ion-card-content>
+        <br>
         <div class="time-container">
           <ion-input labelPlacement="stacked" label="Date" [value]="dateString" [disabled]="true"></ion-input>
           <div class="spacer"></div>
@@ -28,7 +29,7 @@
           <ion-input labelPlacement="stacked" label="Phone Number" type="tel" placeholder="888-888-8888" errorText="Required" [formControl]="phoneNumberFormControl"></ion-input>
         </div>
         <div class="spacer"></div>
-        <ion-textarea label="Notes" labelPlacement="floating" fill="outline" placeholder="Enter additional patient information" [formControl]="notesFormControl">
+        <ion-textarea label="Notes" labelPlacement="floating" fill="outline" placeholder="Enter additional patient information" [formControl]="notesFormControl" style="height: 250px;">
         </ion-textarea>
       </ion-card-content>
     </ion-card-header>

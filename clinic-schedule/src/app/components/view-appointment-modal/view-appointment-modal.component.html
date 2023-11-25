@@ -3,28 +3,31 @@
     <ion-card-header>
       <ion-card-subtitle class="centered">NORTHWEST MEDICAL CLINIC</ion-card-subtitle>
       <ion-card-title class="centered">APPOINTMENT VIEW</ion-card-title>
+      <ion-label style="line-height: 3.0;"></ion-label>
+      <ion-card-title class="centered"> {{appointment?.patient?.firstName}} {{appointment?.patient?.lastName}}</ion-card-title>
+      <ion-card-subtitle class="centered"> {{appointment?.patient?.phoneNumber}}</ion-card-subtitle>
+      <ion-label style="line-height: 3.0;">
+        <div class="row-container">
+          <ion-card-title>{{getAppointmentDate()}}</ion-card-title>
+          <div class="small-spacer"></div>
+          <ion-card-subtitle>{{getAppointmentTimeRange()}}</ion-card-subtitle>
+        </div>
+      </ion-label>
       <ion-card-content>
-        <div class="main-container">
-          <div class="patient-information container">
-            <div class="column-container">
-              <ion-card-title>{{appointment?.patient?.firstName}} {{appointment?.patient?.lastName}}</ion-card-title>
-              <ion-card-subtitle>{{appointment?.patient?.phoneNumber}}</ion-card-subtitle>
+        <div class="main-container" class="centered">
+          <div class="patient-information container" class="centered">
+            <div class="column-container" class="centered">
             </div>
-            <div class="spacer"></div>
-            <ion-textarea label="NOTES" labelPlacement="floating" fill="outline" [value]="appointment?.notes" [disabled]="true">
+            <ion-textarea class="centered" label="NOTES" labelPlacement="floating" fill="outline"
+              [value]="appointment?.notes" [disabled]="true" style="height: 150px; width:500px;">
             </ion-textarea>
           </div>
           <div class="spacer"></div>
           <div class="appointment-controls-container">
-            <div class="row-container">
-              <ion-card-title>{{getAppointmentDate()}}</ion-card-title>
-              <div class="small-spacer"></div>
-              <ion-card-subtitle>{{getAppointmentTimeRange()}}</ion-card-subtitle>
-            </div>
             <div class="small-spacer"></div>
             <div class="row-container">
-              <ion-button color="secondary" (click)="updateAppointment()">UPDATE</ion-button>
-              <ion-button color="danger" (click)="openCancelAppointmentModal()">REMOVE</ion-button>
+              <ion-button color="secondary" (click)="updateAppointment()" style="width: 100%;">UPDATE</ion-button>
+              <ion-button color="danger" (click)="openCancelAppointmentModal()" style="width: 100%;">REMOVE</ion-button>
             </div>
             <ion-button [color]="appointment?.checkedIn ? 'warning' : 'success'" (click)="checkInOut(appointment!)">
               {{getCheckInLabel()}}

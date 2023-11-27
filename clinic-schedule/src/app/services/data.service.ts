@@ -190,7 +190,7 @@ export class DataService {
   }
 
   public getScheduleByDate(dateString: string) {
-    return this.schedule[dateString] || [];
+    return this.schedule[dateString]?.filter(appointment => appointment.physicianName === this.physicianName.getValue()) || [];
   }
 
   public getSchedule(): {[date: string]: Appointment[]} {

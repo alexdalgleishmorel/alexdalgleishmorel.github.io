@@ -19,6 +19,7 @@ export class PatientSearchModalComponent implements OnInit {
     for (let date in schedule) {
       this.appointments = this.appointments.concat(schedule[date]);
     }
+    this.appointments = this.appointments.filter(appointment => appointment.physicianName === this.dataService.physicianName.getValue());
     this.unfilteredAppointments = this.appointments;
   }
 

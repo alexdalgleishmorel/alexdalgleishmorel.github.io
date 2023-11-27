@@ -1,5 +1,8 @@
 <ion-content>
   <div class="content">
+    <ion-card-title class="centered"> {{appointment?.patient?.firstName}} {{appointment?.patient?.lastName}}</ion-card-title>
+    <ion-card-subtitle>{{getAppointmentDate()}}</ion-card-subtitle>
+    <ion-card-subtitle>{{getAppointmentTimeRange()}}</ion-card-subtitle>
     <ion-card-header class="centered">
       <ion-card-content>
         <ion-card-title>Are you sure you want to remove this appointment from the schedule?</ion-card-title>

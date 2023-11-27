@@ -65,7 +65,10 @@ export class ViewAppointmentModalComponent implements OnInit {
     if (!this.appointment) return;
 
     const modal = await this.modalCtrl.create({
-      component: CancelAppointmentModalComponent
+      component: CancelAppointmentModalComponent,
+      componentProps: {
+        appointment: this.appointment
+      }
     });
     modal.present();
 

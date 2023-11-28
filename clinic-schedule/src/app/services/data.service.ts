@@ -22,7 +22,8 @@ export class DataService {
         patient: {
           firstName: 'Steven',
           lastName: 'Smith',
-          phoneNumber: '(403)-123-4567'
+          phoneNumber: '(403)-123-4567',
+          healthNumber: '011 854 432'
         },
         startTime: 11,
         endTime: 12.5,
@@ -38,7 +39,8 @@ export class DataService {
         patient: {
           firstName: 'Alex',
           lastName: 'Jameson',
-          phoneNumber: '(403)-333-4537'
+          phoneNumber: '(403)-333-4537',
+          healthNumber: '886 453 122'
         },
         startTime: 10,
         endTime: 11.5,
@@ -54,7 +56,8 @@ export class DataService {
         patient: {
           firstName: 'Lisa',
           lastName: 'Moss',
-          phoneNumber: '(403)-123-9999'
+          phoneNumber: '(403)-123-9999',
+          healthNumber: '994 382 122'
         },
         startTime: 11,
         endTime: 13,
@@ -70,7 +73,8 @@ export class DataService {
         patient: {
           firstName: 'Brook',
           lastName: 'Lopez',
-          phoneNumber: '(403)-321-7654'
+          phoneNumber: '(403)-321-7654',
+          healthNumber: '294 369 846'
         },
         startTime: 13,
         endTime: 15,
@@ -86,7 +90,8 @@ export class DataService {
         patient: {
           firstName: 'Kyrie',
           lastName: 'Irving',
-          phoneNumber: '(403)-777-1352'
+          phoneNumber: '(403)-777-1352',
+          healthNumber: '236 856 657'
         },
         startTime: 11.5,
         endTime: 14,
@@ -352,6 +357,7 @@ export interface Patient {
   firstName: string;
   lastName: string;
   phoneNumber: string;
+  healthNumber: string;
 }
 
 export interface Appointment {

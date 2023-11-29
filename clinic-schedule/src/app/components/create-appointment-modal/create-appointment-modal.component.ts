@@ -23,6 +23,7 @@ export class CreateAppointmentModalComponent implements OnInit {
   public firstNameFormControl: FormControl = new FormControl();
   public lastNameFormControl: FormControl = new FormControl();
   public phoneNumberFormControl: FormControl = new FormControl();
+  public healthNumberFormControl: FormControl = new FormControl();
   public notesFormControl: FormControl = new FormControl();
 
   public formGroup: FormGroup = this.formBuilder.group({
@@ -31,6 +32,7 @@ export class CreateAppointmentModalComponent implements OnInit {
     firstNameFormControl: this.firstNameFormControl,
     lastNameFormControl: this.lastNameFormControl,
     phoneNumberFormControl: this.phoneNumberFormControl,
+    healthNumberFormControl: this.healthNumberFormControl,
     notesFormControl: this.notesFormControl
   });
 
@@ -93,7 +95,8 @@ export class CreateAppointmentModalComponent implements OnInit {
     this.endTimeNumber = appointment.endTime;
     this.firstNameFormControl.setValue(appointment.patient.firstName);
     this.lastNameFormControl.setValue(appointment.patient.lastName);
-    this.phoneNumberFormControl.setValue(appointment.patient.phoneNumber);
+    this.phoneNumberFormControl.setValue(appointment.patient.phoneNumber)
+    this.healthNumberFormControl.setValue(appointment.patient.healthNumber);
     this.notesFormControl.setValue(appointment.notes);
   }
 
@@ -125,7 +128,8 @@ export class CreateAppointmentModalComponent implements OnInit {
       patient: {
         firstName: this.firstNameFormControl.getRawValue(),
         lastName: this.lastNameFormControl.getRawValue(),
-        phoneNumber: this.phoneNumberFormControl.getRawValue()
+        phoneNumber: this.phoneNumberFormControl.getRawValue(),
+        healthNumber: this.healthNumberFormControl.getRawValue()
       },
       physicianName: this.dataService.physicianName.getValue(),
       notes: this.notesFormControl.getRawValue(),
@@ -157,7 +161,8 @@ export class CreateAppointmentModalComponent implements OnInit {
       && this.endTimeFormControl.getRawValue() 
       && this.firstNameFormControl.getRawValue() 
       && this.lastNameFormControl.getRawValue() 
-      && this.phoneNumberFormControl.getRawValue();
+      && this.phoneNumberFormControl.getRawValue()
+      && this.healthNumberFormControl.getRawValue();
   }
 
   public getStartTimes(): string[] {

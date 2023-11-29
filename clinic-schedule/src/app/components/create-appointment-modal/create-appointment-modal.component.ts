@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Appointment, DataService } from 'src/app/services/data.service';
+import {conformToMask} from 'text-mask-core';
+import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe'
+
 
 @Component({
   selector: 'app-create-appointment-modal',
@@ -37,6 +40,8 @@ export class CreateAppointmentModalComponent implements OnInit {
 
   private startTimeNumber: number = 0;
   private endTimeNumber: number = 0;
+
+  phoneNumberPipe = createAutoCorrectedDatePipe('(999)999-9999');
 
   constructor(
     private dataService: DataService, 
@@ -93,6 +98,21 @@ export class CreateAppointmentModalComponent implements OnInit {
     this.phoneNumberFormControl.setValue(appointment.patient.phoneNumber)
     this.healthNumberFormControl.setValue(appointment.patient.healthNumber);
     this.notesFormControl.setValue(appointment.notes);
+  }
+
+  formatPhoneNumber(event: any) {
+    const inputValue: string = event.target.value;
+    const numericValue: string = inputValue.replace(/\D/g, '');
+    const formattedValue: string = this.formatPhoneNumberString(numericValue);  
+    this.phoneNumberFormControl.setValue(formattedValue);
+  }
+
+  private formatPhoneNumberString(value: string): string {
+    const match = value.match(/^(\d{3})(\d{0,3})(\d{0,4})$/);
+    if (match) {
+      return `(${match[1]})${match[2] ? ' ' + match[2] : ''}${match[3] ? '-' + match[3] : ''}`;
+    }
+    return value;
   }
 
   cancel() {    

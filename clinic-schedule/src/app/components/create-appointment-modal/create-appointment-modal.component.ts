@@ -99,14 +99,8 @@ export class CreateAppointmentModalComponent implements OnInit {
 
   formatPhoneNumber(event: any) {
     const inputValue: string = event.target.value;
-  
-    // Remove any non-numeric characters from the input
     const numericValue: string = inputValue.replace(/\D/g, '');
-  
-    // Format the phone number as (XXX) XXX-XXXX
-    const formattedValue: string = this.formatPhoneNumberString(numericValue);
-  
-    // Update the form control with the formatted value
+    const formattedValue: string = this.formatPhoneNumberString(numericValue);  
     this.phoneNumberFormControl.setValue(formattedValue);
   }
 

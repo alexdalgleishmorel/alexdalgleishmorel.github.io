@@ -3,8 +3,15 @@
     <div class="toolbar-spacer"></div>
     <ion-card (click)="openLogoutModal()" class="user-context">
       <ion-card-header>
-        <ion-card-title>{{userContext.firstName}} {{userContext.lastName}}</ion-card-title>
-        <ion-card-subtitle>{{userContext.role}}</ion-card-subtitle>
+        <div class="row">
+          <div class="col">
+            <ion-card-title>{{userContext.firstName}} {{userContext.lastName}}</ion-card-title>
+            <ion-card-subtitle>{{userContext.role}}</ion-card-subtitle>
+          </div>
+          <div class="col">
+            <ion-icon class="logout-button" color="primary" size="large" name="log-out-outline"></ion-icon>
+          </div>
+        </div>
       </ion-card-header>
     </ion-card>
     <div class="toolbar-spacer"></div>
@@ -15,10 +22,11 @@
     <ion-searchbar (click)="openPatientSearchModal()" [disabled]="!physicianName" placeholder="Patient Name"></ion-searchbar>
     <div class="toolbar-spacer"></div>
     <ion-button size="small" (click)="decrementDateIndex()"><ion-icon name="chevron-back-outline"></ion-icon></ion-button>
-    <ion-title class="dateButton" (click)="openCalendar()">{{getCurrentDateRange()}}
+    <ion-title class="dateButton" (click)="openCalendar()">
       <span class="button__icon">
-        <ion-icon name="calendar-outline"></ion-icon>
+        <ion-icon color="primary" name="calendar-outline"></ion-icon>
       </span>
+      <ion-text>{{getCurrentDateRange()}}</ion-text>
     </ion-title>
     <ion-button size="small" (click)="incrementDateIndex()"><ion-icon name="chevron-forward-outline"></ion-icon></ion-button>
     <div class="toolbar-spacer"></div>
@@ -38,7 +46,10 @@
 </ng-template>
 
 <style>
-.button__icon{
-  padding-left: 5px;
+  .button__icon{
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>

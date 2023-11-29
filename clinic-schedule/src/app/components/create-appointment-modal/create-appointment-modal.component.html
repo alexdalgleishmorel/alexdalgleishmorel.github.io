@@ -1,10 +1,10 @@
 <ion-content>
   <div class="content">
-    <ion-card-subtitle class="centered">NORTHWEST MEDICAL CLINIC</ion-card-subtitle>
     <ion-card-title class="centered">APPOINTMENT BOOKING</ion-card-title>
     <ion-card-content>
       <br>
       <div class="time-container">
+        <div class="spacer"></div>
         <ion-input labelPlacement="stacked" label="Date" [value]="dateString" [disabled]="true"></ion-input>
         <div class="spacer"></div>
         <ion-select label="Start Time" label-placement="floating" fill="outline" [value]="startTimeFormControl.getRawValue()" [formControl]="startTimeFormControl">
@@ -18,14 +18,19 @@
             {{time}}
           </ion-select-option>
         </ion-select>
+        <div class="spacer"></div>
       </div>
       <div class="spacer"></div>
       <div class="name-container">
+        <div class="spacer"></div>
         <ion-input labelPlacement="stacked" label="First Name" placeholder="Patient first name" errorText="Required" [formControl]="firstNameFormControl"></ion-input>
         <div class="spacer"></div>
         <ion-input labelPlacement="stacked" label="Last Name" placeholder="Patient last name" errorText="Required" [formControl]="lastNameFormControl"></ion-input>
         <div class="spacer"></div>
         <ion-input labelPlacement="stacked" label="Phone Number" type="tel" placeholder="(888) 888-8888" errorText="Required" [formControl]="phoneNumberFormControl" (input)="formatPhoneNumber($event)"></ion-input>
+        <div class="spacer"></div>
+        <ion-input labelPlacement="stacked" label="Health Number" placeholder="000 000 000" errorText="Required" [formControl]="healthNumberFormControl"></ion-input>
+        <div class="spacer"></div>
       </div>
       <div class="spacer"></div>
       <ion-textarea label="Notes" labelPlacement="floating" fill="outline" placeholder="Enter additional patient information" [formControl]="notesFormControl" style="height: 175px;">

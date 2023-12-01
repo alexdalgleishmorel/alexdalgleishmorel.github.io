@@ -36,11 +36,11 @@ export class LoginPage implements OnInit {
     const enteredPassword = this.passwordFormControl.value;
   
     if (
-      (enteredUsername === 'alex' && enteredPassword === 'qwerty') ||
-      (enteredUsername === 'bryant' && enteredPassword === 'qwerty') ||
-      (enteredUsername === 'gabriel' && enteredPassword === 'qwerty') ||
-      (enteredUsername === 'stevan' && enteredPassword === 'qwerty') ||
-      (enteredUsername === 'umair' && enteredPassword === 'qwerty')
+      (enteredUsername === 'alex@gmail.com' && enteredPassword === 'qwerty') ||
+      (enteredUsername === 'bryant@gmail.com' && enteredPassword === 'qwerty') ||
+      (enteredUsername === 'gabriel@gmail.com' && enteredPassword === 'qwerty') ||
+      (enteredUsername === 'stevan@gmail.com' && enteredPassword === 'qwerty') ||
+      (enteredUsername === 'umair@gmail.com' && enteredPassword === 'qwerty')
     ) {
       this.dataService.updateCurrentUser(enteredUsername, enteredPassword);
   

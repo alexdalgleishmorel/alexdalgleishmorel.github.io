@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ModalController, ToastController } from '@ionic/angular';
 
 @Component({
@@ -7,6 +8,8 @@ import { ModalController, ToastController } from '@ionic/angular';
   styleUrls: ['./forgot-password-modal.component.scss'],
 })
 export class ForgotPasswordModalComponent implements OnInit {
+
+  public emailFormControl: FormControl = new FormControl('');
 
   constructor(
     private modalCtrl: ModalController,

@@ -72,4 +72,10 @@ export class LoginPage implements OnInit {
   canLogin(): boolean {
     return this.formGroup.valid && !!this.usernameFormControl.getRawValue() && !!this.passwordFormControl.getRawValue();
   }
+
+  checkForEnter(event: any) {
+    if (event.keyCode === 13) {
+      this.login();
+    }
+  }
 }

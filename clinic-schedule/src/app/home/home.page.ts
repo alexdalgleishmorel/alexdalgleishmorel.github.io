@@ -29,6 +29,7 @@ export class HomePage {
   }
 
   async openCalendar() {
+    if (!this.physicianName) { return; }
     const modal = await this.modalCtrl.create({
       component: DateSelectionModalComponent,
     });

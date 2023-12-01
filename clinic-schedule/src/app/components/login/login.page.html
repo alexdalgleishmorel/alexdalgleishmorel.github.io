@@ -10,6 +10,7 @@
             placeholder="Enter your email" 
             errorText="Required"
             [formControl]="usernameFormControl"
+            (keypress)="checkForEnter($event)"
           >
           </ion-input>
           <ion-input 
@@ -18,6 +19,7 @@
             placeholder="Enter your password"
             errorText="Required"
             [formControl]="passwordFormControl"
+            (keypress)="checkForEnter($event)"
           >
           </ion-input>
         </ion-card-content>

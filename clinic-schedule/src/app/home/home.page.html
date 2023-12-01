@@ -8,6 +8,7 @@
             <ion-card-title>{{userContext.firstName}} {{userContext.lastName}}</ion-card-title>
             <ion-card-subtitle>{{userContext.role}}</ion-card-subtitle>
           </div>
+          <div class="spacer"></div>
           <div class="col">
             <ion-icon class="logout-button" color="primary" size="large" name="log-out-outline"></ion-icon>
           </div>
@@ -21,14 +22,14 @@
     <div class="toolbar-spacer"></div>
     <ion-searchbar (click)="openPatientSearchModal()" [disabled]="!physicianName" placeholder="Patient Name"></ion-searchbar>
     <div class="toolbar-spacer"></div>
-    <ion-button size="small" (click)="decrementDateIndex()"><ion-icon name="chevron-back-outline"></ion-icon></ion-button>
+    <ion-button [disabled]="!physicianName" size="small" (click)="decrementDateIndex()"><ion-icon name="chevron-back-outline"></ion-icon></ion-button>
     <ion-title class="dateButton" (click)="openCalendar()">
       <span class="button__icon">
-        <ion-icon color="primary" name="calendar-outline"></ion-icon>
+        <ion-icon [color]="!physicianName ? 'medium' : 'primary'" name="calendar-outline"></ion-icon>
       </span>
-      <ion-text>{{getCurrentDateRange()}}</ion-text>
+      <ion-text [color]="!physicianName ? 'medium' : 'dark'">{{getCurrentDateRange()}}</ion-text>
     </ion-title>
-    <ion-button size="small" (click)="incrementDateIndex()"><ion-icon name="chevron-forward-outline"></ion-icon></ion-button>
+    <ion-button [disabled]="!physicianName" size="small" (click)="incrementDateIndex()"><ion-icon name="chevron-forward-outline"></ion-icon></ion-button>
     <div class="toolbar-spacer"></div>
   </div>
 </ion-header>

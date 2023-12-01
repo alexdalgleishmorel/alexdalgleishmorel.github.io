@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -115,7 +116,7 @@ export class DataService {
   public physicianName: BehaviorSubject<string> = new BehaviorSubject<string>('');
   public scheduleUpdate: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor() {
+  constructor(private toastController: ToastController) {
     this.dateRanges = this.getDateRanges();
   }
 
@@ -223,11 +224,68 @@ export class DataService {
     this.physicianName.next(name);
   }
 
-  public createAppointment(appointment: Appointment) {
+  public createAppointment(appointment: Appointment): boolean {
+    let valid: boolean = true;
+
+    const dailySchedule: Appointment[] = this.schedule[appointment.date];
+
+    dailySchedule.forEach(app => {
+      if (this.isOverlap(appointment, app)) {
+        this.toastController.create({
+          message: 'The new appointment overlaps with an existing appointment. No appointment created.',
+          duration: 3000,
+          position: 'top',
+          color: 'danger',
+          cssClass: 'centeredToast'
+        }).then(toast => {
+          toast.present();
+        });
+        valid = false;
+      }
+    });
+
+    if (!valid) {
+      return false;
+    }
+
     this.schedule[appointment.date] ? this.schedule[appointment.date].push(appointment) : this.schedule[appointment.date] = [appointment];
+    return true;
   }
 
-  public updateAppointment(appointmentToUpdate: Appointment) {
+  private isOverlap(appointment: Appointment, existingAppointment: Appointment) {
+    return this.inRange(appointment.startTime, existingAppointment.startTime, existingAppointment.endTime, false) || 
+      this.inRange(appointment.endTime, existingAppointment.startTime, existingAppointment.endTime, true) ||
+      (appointment.startTime < existingAppointment.startTime && appointment.endTime > existingAppointment.endTime);
+  }
+
+  private inRange(value: number, start: number, end: number, checkingEnd: boolean) {
+    return checkingEnd ? value > start && value <= end : value >= start && value < end;
+  }
+
+  public updateAppointment(appointmentToUpdate: Appointment): boolean {
+    let valid: boolean = true;
+
+    const dailySchedule: Appointment[] = this.schedule[appointmentToUpdate.date];
+
+    dailySchedule.forEach(app => {
+      if (this.isOverlap(appointmentToUpdate, app) && app.id !== appointmentToUpdate.id) {
+        this.toastController.create({
+          message: 'The updated appointment overlaps with an existing appointment. No update was made.',
+          duration: 3000,
+          position: 'top',
+          color: 'danger',
+          cssClass: 'centeredToast'
+        }).then(toast => {
+          toast.present();
+        });
+        valid = false;
+      }
+    });
+
+    if (!valid) {
+      return false;
+    }
+
     for (let day of Object.values(this.schedule)) {
       for (let appointment of day) {
         if (appointment.id === appointmentToUpdate.id) {
@@ -236,13 +294,16 @@ export class DataService {
           for (let app of this.schedule[appointment.date]) {
             if (app.id === appointment.id) {
               this.schedule[appointment.date][index] = appointmentToUpdate;
-              return;
+              valid = true;
+              return true;
             }
             index++;
           }
         }
       }
     }
+
+    return false;
   }
 
   public cancelAppointment(appointmentToUpdate: Appointment) {

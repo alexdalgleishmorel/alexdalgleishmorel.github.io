@@ -137,21 +137,28 @@ export class CreateAppointmentModalComponent implements OnInit {
     };
 
     if (!this.appointment) {
-      this.dataService.createAppointment(generatedAppointment);
-
-      const toast = await this.toastController.create({
-        message: 'Appointment has been successfully created',
-        duration: 3000,
-        position: 'top',
-        color: 'success',
-        cssClass: 'centeredToast'
-      });
-      await toast.present();
+      if (this.dataService.createAppointment(generatedAppointment)) {
+        this.presentCreationSuccessModal();
+      }
     } else {
-      this.dataService.updateAppointment(generatedAppointment);
+      if (!this.dataService.updateAppointment(generatedAppointment)) {
+        this.modalCtrl.dismiss(false);
+        return;
+      }
     }
 
     this.modalCtrl.dismiss(true);
+  }
+
+  async presentCreationSuccessModal() {
+    const toast = await this.toastController.create({
+      message: 'Appointment has been successfully created',
+      duration: 3000,
+      position: 'top',
+      color: 'success',
+      cssClass: 'centeredToast'
+    });
+    await toast.present();
   }
 
   public canConfirmAppointment(): boolean {

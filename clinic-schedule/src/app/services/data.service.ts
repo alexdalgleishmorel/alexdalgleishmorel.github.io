@@ -290,35 +290,35 @@ export class DataService {
 
     let updatedUser: SystemUser | undefined;
   
-    if (enteredUsername === 'alex@gmail.com' && enteredPassword === 'qwerty') {
+    if (enteredUsername === 'alex@gmail.com' && enteredPassword === 'cpsc481') {
       updatedUser = {
         firstName: 'Alex',
         lastName: 'Dalgleish',
         role: UserRole.NURSE,
         email: 'alex@gmail.com'
       };
-    } else if (enteredUsername === 'bryant@gmail.com' && enteredPassword === 'qwerty') {
+    } else if (enteredUsername === 'bryant@gmail.com' && enteredPassword === 'cpsc481') {
       updatedUser = {
         firstName: 'Bryant',
         lastName: 'Zhang',
         role: UserRole.RECEPTIONIST,
         email: 'bryant@gmail.com'
       };
-    } else if (enteredUsername === 'gabriel@gmail.com' && enteredPassword === 'qwerty') {
+    } else if (enteredUsername === 'gabriel@gmail.com' && enteredPassword === 'cpsc481') {
       updatedUser = {
         firstName: 'Gabriel',
         lastName: 'Cameron',
         role: UserRole.NURSE,
         email: 'gabriel@gmail.com'
       };
-    } else if (enteredUsername === 'stevan@gmail.com' && enteredPassword === 'qwerty') {
+    } else if (enteredUsername === 'stevan@gmail.com' && enteredPassword === 'cpsc481') {
       updatedUser = {
         firstName: 'Stevan',
         lastName: 'Beljic',
         role: UserRole.PHYSICIAN,
         email: 'stevan@gmail.com'
       };
-    } else if (enteredUsername === 'umair@gmail.com' && enteredPassword === 'qwerty') {
+    } else if (enteredUsername === 'umair@gmail.com' && enteredPassword === 'cpsc481') {
       updatedUser = {
         firstName: 'Umair',
         lastName: 'Tariq',

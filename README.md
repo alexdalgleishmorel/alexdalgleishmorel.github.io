@@ -1,5 +1,15 @@
 # CPSC 481 - Final Project Fall 2023
 ## T01 Group 4 - NorthWest Medical Clinic Schedule System
+### Group Members:
+Alexander Dalgleish-Morel, 
+
+Bryant Zhang, 
+
+Gabriel Cameron, 
+
+Stevan Beljić, 
+
+Umair Tariq.
 
 ## Setup
 
@@ -11,3 +21,5 @@ This will be a command-line interface that will allow you to build and run the p
 
 ### Step 3 - Running The Project
 At this point, you should be able to simply run `ionic serve` from the main directory of the repo to get the project running. If prompted to install @angular/cli then please input Yes (Y) and install the angular interface tool. Any changes made and saved to the code will dynamically update the front-end!
+
+## System Usage Instructions

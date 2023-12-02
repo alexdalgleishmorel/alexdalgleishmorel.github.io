@@ -227,7 +227,7 @@ export class DataService {
   public createAppointment(appointment: Appointment): boolean {
     let valid: boolean = true;
 
-    const dailySchedule: Appointment[] = this.schedule[appointment.date];
+    const dailySchedule: Appointment[] = this.schedule[appointment.date] || [];
 
     dailySchedule.forEach(app => {
       if (this.isOverlap(appointment, app)) {
@@ -265,7 +265,7 @@ export class DataService {
   public updateAppointment(appointmentToUpdate: Appointment): boolean {
     let valid: boolean = true;
 
-    const dailySchedule: Appointment[] = this.schedule[appointmentToUpdate.date];
+    const dailySchedule: Appointment[] = this.schedule[appointmentToUpdate.date] || [];
 
     dailySchedule.forEach(app => {
       if (this.isOverlap(appointmentToUpdate, app) && app.id !== appointmentToUpdate.id) {

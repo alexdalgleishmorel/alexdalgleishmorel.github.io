@@ -155,41 +155,32 @@ export class DataService {
   private getDateRanges(): DateRange[] {
 
     // ADDING FUTURE DATES
-    let currentDate = new Date;
+    let currentDate = new Date();
     const numOfWeeksToGenerate: number = 52;
     let futureDateRanges: DateRange[] = [];
 
     for (let i = 0; i < numOfWeeksToGenerate; i ++) {
-      let mondayNumberValue = currentDate.getDate() - currentDate.getDay() + 1;
-      let sundayNumberValue = mondayNumberValue + 6;
-      
-      let mondayDate = new Date(currentDate.setDate(mondayNumberValue));
-      let sundayDate = new Date(currentDate.setDate(sundayNumberValue));
 
       futureDateRanges.push({ 
-        startDate: mondayDate.toLocaleDateString('en-US'), 
-        endDate: sundayDate.toLocaleDateString('en-US') 
+        startDate: getMonday(currentDate).toLocaleDateString('en-US'), 
+        endDate: getSunday(currentDate).toLocaleDateString('en-US') 
       });
-      currentDate.setDate(sundayDate.getDate()+1);
+
+      currentDate.setDate(getSunday(currentDate).getDate()+1);
     }
 
     // ADDING PAST DATES
-    currentDate = new Date;
+    currentDate = new Date();
     currentDate.setFullYear(currentDate.getFullYear()-1);
     let pastDateRanges: DateRange[] = [];
 
     for (let i = 0; i < numOfWeeksToGenerate; i ++) {
-      let mondayNumberValue = currentDate.getDate() - currentDate.getDay() + 1;
-      let sundayNumberValue = mondayNumberValue + 6;
-      
-      let mondayDate = new Date(currentDate.setDate(mondayNumberValue));
-      let sundayDate = new Date(currentDate.setDate(sundayNumberValue));
 
       pastDateRanges.push({ 
-        startDate: mondayDate.toLocaleDateString('en-US'), 
-        endDate: sundayDate.toLocaleDateString('en-US') 
+        startDate: getMonday(currentDate).toLocaleDateString('en-US'),
+        endDate: getSunday(currentDate).toLocaleDateString('en-US') 
       });
-      currentDate.setDate(sundayDate.getDate()+1);
+      currentDate.setDate(getSunday(currentDate).getDate()+1);
     }
 
     return pastDateRanges.concat(futureDateRanges);
@@ -435,4 +426,16 @@ export interface Appointment {
 export interface DateRange {
   startDate: string;
   endDate: string;
+}
+
+function getMonday(date: Date): Date {
+  const day = date.getDay();
+  const diff = date.getDate() - day + (day === 0 ? -6 : 1); // adjust when Sunday
+  return new Date(date.setDate(diff));
+}
+
+function getSunday(date: Date): Date {
+  const day = date.getDay();
+  const diff = date.getDate() + (day === 0 ? 0 : 7 - day); // adjust when Sunday
+  return new Date(date.setDate(diff));
 }

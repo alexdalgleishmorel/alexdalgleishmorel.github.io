@@ -140,3 +140,6 @@ Step 2: click the logout button.
 
 Result: clicking the logout button logs out the user, bringing them to the login page.
 
+## Important System Usage Information
+## It is not possible to attempt to schedule another appointment at a time that has already been scheduled. The system will detect it and notify the user of the conflict.
+## Refreshing the page or attempting to modify the code will cause the system to lose data (lose booked appointments), returning the user to the login page. As it is not required to have a database in this course, the database is mocked for the system.

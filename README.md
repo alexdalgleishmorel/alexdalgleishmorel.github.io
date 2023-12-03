@@ -24,7 +24,7 @@ At this point, you should be able to simply run `ionic serve` from the main dire
 
 ## System Usage Instructions
 ### Login
-Step 1: In the login page, in the email field, enter one of the group members first name followed by “@gmail.com”, for example “alex@gmail.com”.
+Step 1: In the login page, in the email field, enter one of the group members first name followed by “@gmail.com”, for example “alex@gmail.com”.#
 Step 2: in the password field, enter “cpsc481”.
 Step 3: click the login button.
 Result: The home screen will be displayed.

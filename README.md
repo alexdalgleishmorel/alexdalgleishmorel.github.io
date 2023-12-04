@@ -11,6 +11,9 @@ Stevan Beljić,
 
 Umair Tariq.
 
+## Portfolio
+https://docs.google.com/document/d/19sHAnEZDAXm5mgAdLiiQm_3YwSitxvhVKKNTMbSfENI/edit?usp=sharing
+
 ## Setup
 
 ### Step 1 - Environment
